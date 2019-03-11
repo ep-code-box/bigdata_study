@@ -28,6 +28,29 @@ sqoop import \
 --as-parquetfile
 ```
 
+```
+[training@localhost ~]$ parquet-tools head hdfs://localhost/loudacre/accounts/user_compressed
+acct_num = 64881
+first_name = Virginia
+last_name = Etter
+
+acct_num = 64882
+first_name = Thomas
+last_name = Jones
+
+acct_num = 64883
+first_name = Jennifer
+last_name = Spangler
+
+acct_num = 64884
+first_name = Kathleen
+last_name = Blubaugh
+
+acct_num = 64885
+first_name = Daniel
+last_name = Wells
+```
+
 3.
 
 ```
