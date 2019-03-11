@@ -20,14 +20,15 @@ flumber.sources.netc.type = netcat
 flumber.sources.netc.bind = localhost
 flumber.sources.netc.port = 44444
 
-flumber.sinks.logk.type = logger
+flumber.sources.netc.channels = no7
 
 flumber.channels.no7.type                = netcat
 flumber.channels.no7.capacity            = 1000
 flumber.channels.no7.transactionCapacity = 100
 
-flumber.sources.netc.channels = no7
 flumber.sinks.logk.channel    = no7
+
+flumber.sinks.logk.type = logger
 ```
 agent실행
 ```
