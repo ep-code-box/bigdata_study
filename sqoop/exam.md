@@ -1,4 +1,10 @@
-1.
+1. eval을 사용하여 sql을 던지도록 한다.
+   promt에 바로 출력된다.
+   출력된 정보를 보고.
+   필요컬럼을 셋팅하고. (columns)
+   넣을 위치를 정한다. (target-dir in hdfs)
+   필드 구분자는 \t로 셋팅한다. (fields-terminated-by)
+
 ```
 sqoop eval \
 --connect jdbc:mysql://localhost/loudacre \
@@ -14,7 +20,8 @@ sqoop import \
 --fields-terminated-by "\t"
 ```
 
-2.
+2. parquet으로 저장하기 위해 as-parquetfile을 사용하고.
+   저장 방식을 snappy로 하기 위해 코댁을 지정했다.
 
 ```
 sqoop import \
@@ -27,7 +34,7 @@ sqoop import \
 --compression-codec org.apache.hadoop.io.compress.SnappyCodec \
 --as-parquetfile
 ```
-
+   parquet 데이터는 바이너리로   parquet-tools 로 조회 할 수 있다.
 ```
 [training@localhost ~]$ parquet-tools head hdfs://localhost/loudacre/accounts/user_compressed
 acct_num = 64881
@@ -51,7 +58,9 @@ first_name = Daniel
 last_name = Wells
 ```
 
-3.
+3. 이번에는 일반 저장이라 단순 compress 셋팅. 
+   추가로 CA 주에 사는 애들만 모으기 위해 where를 사용함. 
+   단 where는 옵션명.  뒤에 ""를 사용해 where절을 작성한다.
 
 ```
 sqoop import \

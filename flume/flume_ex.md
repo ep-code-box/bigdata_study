@@ -9,7 +9,7 @@ conf 파일 내용
 # channel name no7
 #         type Memory
 #         capa 1000
-#         tran 100
+#         tran 100    한번에 처리하는 량
 # sink    name logk
 
 flumber.sources  = netc
@@ -31,6 +31,9 @@ flumber.sinks.logk.channel    = no7
 flumber.sinks.logk.type = logger
 ```
 agent실행
+
+다른 터미널에서는 접속 후 
+hello, iam ep, can you hear me?  를 입력했다.
 ```
 [training@localhost ~]$ flume-ng agent --conf /etc/flume-ng/conf --conf-file ~/flumber.conf --name flumber -Dflume.root.logger=INFO,console
 Info: Sourcing environment configuration script /etc/flume-ng/conf/flume-env.sh
