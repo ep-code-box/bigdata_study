@@ -129,6 +129,7 @@
 ### with Apache Spark Applications.
 
   > in applicantion
+  
     - make SparkContext. Using name sc
       : sc = SparkContext()
     - 종료시에는 sc.stop() 을 사용해서 메모리 해제 해준다.
