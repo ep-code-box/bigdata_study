@@ -80,7 +80,23 @@
     - subtract : rdd1.subtract(rdd2) := rdd1 - rdd2
 
   > Other Operations
-  
+
     - first : 첫줄만. element 리턴으로 RDD가 아님.
     - foreach : RDD의 element 별로 연산.
     - top(n) : 큰 순서대로 읽어옴. n개.
+
+### Pair RDDs
+ 
+  > 특징과 이유
+
+    - key-value pair : can be any type.
+    - Use with map-reduce algorithms !!
+
+  > keyBy
+    - function으로 뽑은 값을 key, 해당 collection을 value
+      : sc.textFile(xxx).keyBy( function ())
+
+  > flatMapValues
+    - key, value 상태일때 사용 가능함. 튜플이 되어야해.
+      : RDD.flatMapValues(lambda xx : xx.split(':'))
+      : a, 1:2:3:4  =>  a, 1   a, 2   a, 3   a, 4
