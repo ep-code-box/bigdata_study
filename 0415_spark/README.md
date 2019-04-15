@@ -12,5 +12,11 @@
     - A : take(n) - 첫 줄 부터 몇개.
     - A : collect() - 전체를 리턴한다.
     - A : saveAsTextFile(dir) - RDD를 text 파일로 저장
-    - T : map(function) - 새 RDD에 기존 RDD의 데이터를 function을 통해 변조 저장
+    - T : map(function) - 새 RDD에 데이터를 function을 통해 변조 저장
     - T : filter(function) - 새 RDD에 function 조건에 따라 저장. f는 boolean 리턴
+
+  - lazy execution
+    - 실제 데이터를 리턴하기 전까지 연산을 보류 한다.
+    - transformation 은 액션이 아니기에 실 action 이 오기 전까지 lazy 한다.
+
+  - 
