@@ -6,3 +6,5 @@
     - 파일   ( From a file or set offiles )
     - 메모리 ( From datain memory )
     - RDD   ( From another RDD)
+
+  - Action & Transformations
