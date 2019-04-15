@@ -7,6 +7,7 @@
     - 파일   ( From a file or set offiles )
     - 메모리 ( From datain memory )
     - RDD   ( From another RDD)
+    - 위 3가지 특징을 지니고 __변경 불가__하다.
 
   > Action & Transformations
 
@@ -23,5 +24,9 @@
     - transformation 은 액션이 아니기에 실 action 이 오기 전까지 lazy 한다.
 
   > Chaining Transformations
-  
+
     - `.` 을 사용해서 파이프라이닝 처럼 사용할 수 있다.
+
+  > RDD Lineage and toDebugString
+
+    - __RDD__.toDebugString 은 RDD의 족보를 보여준다.(history)
