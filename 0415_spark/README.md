@@ -19,4 +19,5 @@
     - 실제 데이터를 리턴하기 전까지 연산을 보류 한다.
     - transformation 은 액션이 아니기에 실 action 이 오기 전까지 lazy 한다.
 
-  - 
+  - Chaining Transformations
+    - `.` 을 사용해서 파이프라이닝 처럼 사용할 수 있다.
