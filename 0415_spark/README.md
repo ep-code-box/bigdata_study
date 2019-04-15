@@ -4,6 +4,7 @@
 
   > 복구가능한 분산 데이터 셋
 
+
     - 파일   ( From a file or set offiles )
     - 메모리 ( From datain memory )
     - RDD   ( From another RDD)
@@ -38,3 +39,4 @@
     - scala의 경우 더 간단하다.  input을 신경쓰지 않을 때 _를 쓴다.
       ex: line => line.toUpperCase()
       ex: _.toUpperCase()
+
