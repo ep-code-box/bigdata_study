@@ -93,10 +93,43 @@
     - Use with map-reduce algorithms !!
 
   > keyBy
+
     - function으로 뽑은 값을 key, 해당 collection을 value
       : sc.textFile(xxx).keyBy( function ())
 
   > flatMapValues
+
     - key, value 상태일때 사용 가능함. 튜플이 되어야해.
       : RDD.flatMapValues(lambda xx : xx.split(':'))
       : a, 1:2:3:4  =>  a, 1   a, 2   a, 3   a, 4
+
+  > Map-Reduce in Spark
+    
+    - Map phase : map, flatMap, filter, keyBy
+    - Reduce phase : reduceByKey, sortByKey, mean
+      : RDD.reduceByKey ( lambda a, b : a + b )  
+        -- a, b 는 각 collection 의 밸류 . 결과는 키에 연산된 값.
+        -- 연산은 + 나 * 등등등. 순서가 완전 바뀌어도 무방한 케이스만....
+
+  > Pair RDD Operations
+    
+    - countByKey : 리턴 map, 각 키별로 갯수 세어줌.
+    - groupByKey : flatMapValue의 반대. 합쳐진 밸류는 콜랙션 형태가 된다. []
+    - sortByKey : 걍 키 기준으로 정열
+    - join : key 값 기준으로 매칭하여 두개의 RDD를 join한다.
+
+  > Other Pair Operations
+
+    - keys : RDD로 리턴 키값만
+    - values : RDD로 리턴 벨류만
+    - lookup(key) : key에 해당하는 벨류
+    - joins. : leftOuterJoin, rightOuterJoin, fullOuterJoin
+    - value_mapper : mapValues, flatMapValues
+    
+### with Apache Spark Applications.
+
+  > in applicantion
+    - make SparkContext. Using name sc
+      : sc = SparkContext()
+    - 종료시에는 sc.stop() 을 사용해서 메모리 해제 해준다.
+
