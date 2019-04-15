@@ -8,7 +8,7 @@
     - 메모리 ( From datain memory )
     - RDD   ( From another RDD)
 
-    #####위 3가지 특징을 지니고 변경 불가하다. 분산처리를 위해!!
+#####위 3가지 특징을 지니고 변경 불가하다. 분산처리를 위해!!
 
   > Action & Transformations
 
@@ -41,3 +41,6 @@
       ex: _.toUpperCase()
 
 catch up 5
+
+bashrc
+마지막 두라인 # 제거 
