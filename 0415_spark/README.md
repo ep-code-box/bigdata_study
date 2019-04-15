@@ -8,6 +8,7 @@
     - 메모리 ( From datain memory )
     - RDD   ( From another RDD)
     - 위 3가지 특징을 지니고 변경 불가하다. 분산처리를 위해!!
+    - lineage 가 있기에 Resilient 가 가능하다.
 
   > Action & Transformations
 
@@ -25,7 +26,7 @@
 
   > Chaining Transformations
 
-    - '.' 을 사용해서 파이프라이닝 처럼 사용할 수 있다.
+    - `.` 을 사용해서 파이프라이닝 처럼 사용할 수 있다.
 
   > RDD Lineage and toDebugString
 
@@ -35,7 +36,51 @@
     
     - python의 경우 lambda 를 사용한다. 
       ex: lambda x: x.add()
-    - scala의 경우 더 간단하다.  input을 신경쓰지 않을 때 _를 쓴다.
+    - scala의 경우 더 간단하다.  input을 신경쓰지 않을 때 `_` 를 쓴다.
       ex: line => line.toUpperCase()
       ex: _.toUpperCase()
 
+### Working with RDDs
+
+  > RDD 데이터 형식
+
+    - 뭐든 들어갈 수 있음. 완전 유연함.
+    - 한줄은 collection, collection 안 하나의 데이터는 element
+    - Pair RDDs : 키 벨류 로 구성된 RDD
+    - Double RDDs : 숫자 데이터로 구성된 RDD, int가 아닌 double size를 위해
+
+  > load to RDD
+
+    - memory data를 바로 RDD로 만들때??
+      : sc.parallelize( collection )
+    - file에서 RDD를 만들때
+      : sc.textFile( "myfile.txt")
+      : sc.textFile( "mydata/")
+      : sc.textFile( "mydata/*.log")
+      : sc.textFile( "myfile1.txt, myfile2.txt") 
+      : URI 를 통해  `file:`  or  `hdfs:` 등을 통해 경로 지정 가능.
+      : load, save default 는 hdfs.
+    - sc.hadoopFile : newAPIhadoopFile 파일 읽을때. 사용하는 클래스
+    - rdd.saveAsHadoopFile : saveAsNewAPIhadoopFile 파일 저장할때 사용하는 클래스.
+    - sc.wholeTextFiles (directory) : 디렉토리 내 모든 파일을 가져온다. 각파일은 각로우가 된다.
+      : 파일주소, 파일내용들...
+    
+  > Single-RDD Transformations
+
+    - flatMap : 한줄의 collection 을 flatMap 조건에 따라 여러 collection으로 나눈다.  
+    - distinct : 중복을 제거 한다.
+    - sort : 정열.
+
+  > Multi-RDD Transformations
+
+    - intersection : 두 RDD의 교집합 rdd1.intersection(rdd2)
+    - union : 합치기  rdd1.union(rdd2)   union all과 다름. 그냥 union
+    - zip : 두 RDD는 갯수가 동일해야 한다.
+      rdd1.zip(rdd2) := (rdd1-1 , rdd2-1), (rdd1-2, rdd2-2), (rdd1-3, rdd2-3) ...
+    - subtract : rdd1.subtract(rdd2) := rdd1 - rdd2
+
+  > Other Operations
+  
+    - first : 첫줄만. element 리턴으로 RDD가 아님.
+    - foreach : RDD의 element 별로 연산.
+    - top(n) : 큰 순서대로 읽어옴. n개.
