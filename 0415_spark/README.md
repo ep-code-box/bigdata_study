@@ -25,8 +25,7 @@
 
   > Chaining Transformations
 
-    - ```.``` 을 사용해서 파이프라이닝 처럼 사용할 수 있다.
+    - '.' 을 사용해서 파이프라이닝 처럼 사용할 수 있다.
 
   > RDD Lineage and toDebugString
-
     - RDD.toDebugString 은 RDD의 족보를 보여준다.(history)
