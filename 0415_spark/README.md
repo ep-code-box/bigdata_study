@@ -1,13 +1,13 @@
 # Spark study.
 
-## RDD (Resilient Distributed Dataset)
+### RDD (Resilient Distributed Dataset)
 
   > 복구가능한 분산 데이터 셋
 
     - 파일   ( From a file or set offiles )
     - 메모리 ( From datain memory )
     - RDD   ( From another RDD)
-    - 위 3가지 특징을 지니고 변경 불가하다.
+    - 위 3가지 특징을 지니고 변경 불가하다. 분산처리를 위해!!
 
   > Action & Transformations
 
@@ -28,4 +28,13 @@
     - '.' 을 사용해서 파이프라이닝 처럼 사용할 수 있다.
 
   > RDD Lineage and toDebugString
+
     - RDD.toDebugString 은 RDD의 족보를 보여준다.(history)
+
+  > 익명함수
+    
+    - python의 경우 lambda 를 사용한다. 
+      ex: lambda x: x.add()
+    - scala의 경우 더 간단하다.  input을 신경쓰지 않을 때 _를 쓴다.
+      ex: line => line.toUpperCase()
+      ex: _.toUpperCase()
