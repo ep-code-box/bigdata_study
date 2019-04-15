@@ -7,7 +7,7 @@
     - 파일   ( From a file or set offiles )
     - 메모리 ( From datain memory )
     - RDD   ( From another RDD)
-    - 위 3가지 특징을 지니고 __변경 불가__하다.
+    - 위 3가지 특징을 지니고 **변경 불가**하다.
 
   > Action & Transformations
 
@@ -29,4 +29,4 @@
 
   > RDD Lineage and toDebugString
 
-    - __RDD__.toDebugString 은 RDD의 족보를 보여준다.(history)
+    - **RDD**.toDebugString 은 RDD의 족보를 보여준다.(history)
