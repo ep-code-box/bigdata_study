@@ -7,7 +7,7 @@
     - 파일   ( From a file or set offiles )
     - 메모리 ( From datain memory )
     - RDD   ( From another RDD)
-####__위 3가지 특징을 지니고 변경 불가하다. 분산처리를 위해!!__
+#### __위 3가지 특징을 지니고 변경 불가하다. 분산처리를 위해!!__
 
   > Action & Transformations
 
