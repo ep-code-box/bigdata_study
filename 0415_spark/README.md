@@ -7,7 +7,7 @@
     - 파일   ( From a file or set offiles )
     - 메모리 ( From datain memory )
     - RDD   ( From another RDD)
-    - 위 3가지 특징을 지니고 **변경 불가**하다.
+    - 위 3가지 특징을 지니고 변경 불가하다.
 
   > Action & Transformations
 
@@ -25,8 +25,8 @@
 
   > Chaining Transformations
 
-    - `.` 을 사용해서 파이프라이닝 처럼 사용할 수 있다.
+    - ```.``` 을 사용해서 파이프라이닝 처럼 사용할 수 있다.
 
   > RDD Lineage and toDebugString
 
-    - **RDD**.toDebugString 은 RDD의 족보를 보여준다.(history)
+    - RDD.toDebugString 은 RDD의 족보를 보여준다.(history)
