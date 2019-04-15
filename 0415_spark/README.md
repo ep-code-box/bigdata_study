@@ -4,9 +4,9 @@
 
   > 복구가능한 분산 데이터 셋 
     
-  - 파일   ( From a file or set offiles )
-  - 메모리 ( From datain memory )
-  - RDD   ( From another RDD)
+    - 파일   ( From a file or set offiles )
+    - 메모리 ( From datain memory )
+    - RDD   ( From another RDD)
     
 #####위 3가지 특징을 지니고 변경 불가하다. 분산처리를 위해!!
 
@@ -40,8 +40,3 @@
       ex: line => line.toUpperCase()
       ex: _.toUpperCase()
 
-catch up 5
-
-vi .bashrc
-마지막 두라인 # 제거 
-source .bashrc
