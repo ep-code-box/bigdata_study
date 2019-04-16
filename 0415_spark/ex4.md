@@ -2,7 +2,7 @@
 
 > 수행하기전 파이스파크 기본을 쥬피터로 돌렸던걸 다시 iPython으로 돌린다.
 
-```
+```py
 import sys
 from pyspark import SparkContext
 
