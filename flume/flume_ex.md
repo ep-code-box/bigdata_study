@@ -22,7 +22,7 @@ flumber.sources.netc.port = 44444
 
 flumber.sources.netc.channels = no7
 
-flumber.channels.no7.type                = netcat
+flumber.channels.no7.type                = memory
 flumber.channels.no7.capacity            = 1000
 flumber.channels.no7.transactionCapacity = 100
 
