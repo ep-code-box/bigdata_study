@@ -175,15 +175,57 @@
 
   > application : 아래 잡들이 모이면 하나의 어플이 된다.
   >> job : 결과를 내기 위한 그룹. 스테이지가 모여 job이 된다.
-  >>> stage : 테스트의 집합이며. 다음 스테이지를 가기위해 가장 느린 테스크가 종료되어야 넘거 갈 수 있다. 병렬 수행 가능
+  >>> stage : 테스트의 집합이며. 다음 스테이지를 가기위해 가장 느린 테스크가 종료되어야 넘거 갈 수 있다. 내부 테스크는 병렬 수행 가능
   >>>> task : 하나의 executor에 단위 업무를 전달한다.
   
   > DAG(Directed Acyclic Graph)
 
     - Narrow dependencies
     - Wide dependencies
+    - RDD.toDebugString()  을 써서 DAG를 볼 수 있다.
 
   > Controlling the Level of Parallelism
 
     - 일부 연산은 마지막 항목에 파시션을 선언 할 수 있다.
     - spark.default.parallelism 10  인데 수정 가능하다.
+
+### RDD Persistence
+
+  > persistence
+
+    - 기본적으로 자바의 힙 메모리를 반반 나눠 cash와 persistence 로 쓴다.
+    - cash는 빈번하게 삭제 가능한 것이며 persistence는 남아 있다.
+    - 용량이 가득 차면 가장 오래된 것을 버린다.
+
+  > Persistence and Fault-Tolerance
+
+    - lineage를 통해 resiliency 를 유지한다.
+
+  > Persistence Levels
+
+    - 기본적으로 persist 메소드는 메모리에만 데이터를 저장한다.
+    - storage levels 옵션을 통해. 아래에 저장한다.
+      : Storage location ( memory or disk )
+        >> MEMORY_ONLY       <<-- Scala Default
+        >> MEMORY_AND_DISK
+        >> DISK_ONLY
+      : Format in memory
+        >> MEMORY_ONLY_SER   <<-- Python Default
+        >> MEMORY_AND_DISK_SER
+      : Partition replication
+        >> DISK_ONLY_2
+        >> MEMORY_AND_DISK_2
+        >> MEMORY_ONLY_2
+        >> MEMORY_AND_DISK_SER_2
+        >> MEMORY_ONLY_SER_2
+    - 심플하게는 걍 CASHE() 로 쓰기도 한다.
+
+  > when where
+
+    - memory only : 최고의 퍼포먼스를 위해!
+    - disk : io 시간이 다시 계산하는 시간보다 짧을 때.
+    - replication : net io 전체가 다시 계산하는 것보다 짧을 때.
+
+  > change persistence
+
+    - RDD.unpersist() -> RDD.persist()
