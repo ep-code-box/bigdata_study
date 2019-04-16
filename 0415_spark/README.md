@@ -134,3 +134,27 @@
       : sc = SparkContext()
     - 종료시에는 sc.stop() 을 사용해서 메모리 해제 해준다.
 
+### Configuring Apache Spark Application
+
+  > properties
+
+    - spark.master
+    - spark.app.name
+    - spark.local.dir        default  /tmp  셔플이 진행되는 동안 사용하는 폴더
+    - spark.ui.port          default  4040
+    - spark.executor.memory  default  1G
+    - spark.driver.memory    default  1G
+
+    - spark-submit --conf spark.executor.cores=4   
+    - spark-submit --properties-file filename    default SPARK_HOME/conf/spark-defaults.conf
+      : key value 형태로 저장.
+
+```
+하둡 실행중 어플들 보기.
+$ yarn application -list
+
+위 명령으로 appid찾아서 로그 확인
+$ yarn logs -applicationId <appid>
+```
+
+  > 
