@@ -164,7 +164,7 @@
     
     - sc.textFile( file, partitions)
       : 클러스터는 파티션 2, 로컬의 경우 파티션 1  이 기본.
-    - sc.wholeTextFiles( dir )
+    - sc.wholeTextFiles( dir, partitions )
       : foreachPartition  파티션별 반복하는 명령
       : mapPartitions ??
       : mapPartitionsWithIndex  위와 같으나. 파티션의 인덱스 포함.
@@ -173,10 +173,17 @@
     - 리파티션이 처리되는 연산
       : reduceByKey, sortByKey, join, groupByKey ...
 
-  > Stages
+  > application : 아래 잡들이 모이면 하나의 어플이 된다.
+  >> job : 결과를 내기 위한 그룹. 스테이지가 모여 job이 된다.
+  >>> stage : 테스트의 집합이며. 다음 스테이지를 가기위해 가장 느린 테스크가 종료되어야 넘거 갈 수 있다. 병렬 수행 가능
+  >>>> task : 하나의 executor에 단위 업무를 전달한다.
+  
+  > DAG(Directed Acyclic Graph)
 
-    - 파티션이 변경되지 않고 처리 되는 단위를 Stage라고 한다.?
+    - Narrow dependencies
+    - Wide dependencies
 
-  >  - job : 
-  >>  - stage :
-  >>>  - task :
+  > Controlling the Level of Parallelism
+
+    - 일부 연산은 마지막 항목에 파시션을 선언 할 수 있다.
+    - spark.default.parallelism 10  인데 수정 가능하다.
