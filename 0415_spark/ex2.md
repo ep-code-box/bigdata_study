@@ -36,7 +36,8 @@ rslt_actRDD.saveAsTextFile("hdfs:/loudacre/account-models")
 ```py
 devRDD = sc.textFile("hdfs:/loudacre/devicestatus.txt")
 devRDD.take(2)
-filRDD = devRDD.map(lambda data: data.split(',')).filter(lambda arr: len(arr) == 14)
+# 19번쨰 오는건 무조건 딜리미터다.
+filRDD = devRDD.map(lambda data: data.split(data[19])).filter(lambda arr: len(arr) == 14)
 filRDD.take(1)
 dev1RDD = filRDD.map(lambda a: [a[0], a[1].split(' ')[0], a[1].split(' ')[1], a[2], a[12], a[13]])
 dev1RDD.take(2)
