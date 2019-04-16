@@ -1,6 +1,6 @@
 08418 신성철
 
-![사진](https://photos.app.goo.gl/ihLD5yMS6z2EjNa87)
+![사진](https://github.com/ep-code-box/bigdata_study/blob/master/pic.jpg)
 
 >20190416
 
