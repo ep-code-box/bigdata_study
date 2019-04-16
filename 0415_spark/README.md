@@ -157,4 +157,26 @@
       : $ yarn logs -applicationId <appid>
     - spark debug 세팅 파일
       : SPARK_HOME/conf/log4j.properties
- 
+
+### Parallel Processing in Apache Spark
+
+  > file partitioning 
+    
+    - sc.textFile( file, partitions)
+      : 클러스터는 파티션 2, 로컬의 경우 파티션 1  이 기본.
+    - sc.wholeTextFiles( dir )
+      : foreachPartition  파티션별 반복하는 명령
+      : mapPartitions ??
+      : mapPartitionsWithIndex  위와 같으나. 파티션의 인덱스 포함.
+    - 병렬 처리 가능한 연산
+      : map, flatMap, filter ...
+    - 리파티션이 처리되는 연산
+      : reduceByKey, sortByKey, join, groupByKey ...
+
+  > Stages
+
+    - 파티션이 변경되지 않고 처리 되는 단위를 Stage라고 한다.?
+
+  >  - job : 
+  >>  - stage :
+  >>>  - task :
