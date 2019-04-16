@@ -134,6 +134,36 @@
       : sc = SparkContext()
     - 종료시에는 sc.stop() 을 사용해서 메모리 해제 해준다.
 
+  > resource manage
+
+    - Hadoop YARN
+      : 대부분 사용하고 있고. cluster resources를 다른 어플과 함께 쉐어링 한다. 
+    - Spark Standalone
+      : 설치와 수행이 쉽다.
+      : 확장과 설정이 한정적이며 보안을 지원하지 않는다.
+      : 학습, 테스트, 개발, 소규모에 적합하다.
+    - Apache Mesos
+      : Spark를 지원한 최초 플랫폼.
+
+  > Running a Spark Application Locally
+    
+    - spark-submit --master 'local[n]'  
+      : n은 스레드 갯수. [n]이 없으면 싱글. [*]은 코어가 지원하는 모든거.
+    - python : spark-submit --master yarn-cluster [applFileName] [optionFileName]
+    - scala  : spark-submit --master yarn-cluster --class [className] [applFileName] [optionFileName]
+    - spark-submit options for clusters
+      : --jars : Scala & Java Only.
+      : --py-files : Python Only. 
+      : --driver-java-options : JVM 쪽으로 넘기는 자바 옵션
+      : --executor-memory : executor 별 메모리 할당. ( ex] 1000M, 2g )  default 1g
+      : --packages : maven을 위한거라는데. 외부라이브러리 읽어오기.
+    - Plus several YARN-specific options
+      : --num-executors : 시작때의 executors의 수
+      : --executor-cores : executor별 위치하는 코어수?
+      : --queue : Yarn이 허용하는 큐의 수.
+    - 다른 옵션을 보고 플땐
+      : --help
+
 ### Configuring Apache Spark Application
 
   > properties
