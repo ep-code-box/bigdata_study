@@ -149,12 +149,12 @@
     - spark-submit --properties-file filename    default SPARK_HOME/conf/spark-defaults.conf
       : key value 형태로 저장.
 
-```
-하둡 실행중 어플들 보기.
-$ yarn application -list
+  > logging
 
-위 명령으로 appid찾아서 로그 확인
-$ yarn logs -applicationId <appid>
-```
-
-  > 
+    - 하둡 실행중 어플들 보기.
+      : $ yarn application -list
+    - 위 명령으로 appid찾아서 로그 확인
+      : $ yarn logs -applicationId <appid>
+    - spark debug 세팅 파일
+      : SPARK_HOME/conf/log4j.properties
+ 
