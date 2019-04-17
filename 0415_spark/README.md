@@ -329,7 +329,7 @@
   > DStream ( Discretized Stream )
 
     - Spark Stream을 통해 들어온 조각조각?
-    - sc 선언 -> ssc(sc, time_interval) 선언 -> stream 처리 선언( RDD 처리와 동일 ) -> 시작선언 
+    - sc 선언 -> ssc(sc, time_interval) 선언 -> stream 처리 선언( RDD 처리와 동일 ) -> ssc.start() -> ssc.awaitTermination()
 
   > Data source
 
@@ -348,5 +348,25 @@
     - Output operations
       : Console - pprint > 10개의 데이터를 보여준다.
       : File output - saveAsTextFiles (txt) / saveAsObjectFiles (seq)
-      : Executing other Functions - foreachRDD(function) > time stamp가 RDD에 들어간다.?
+      : Executing other Functions - foreachRDD( lambda (RDD,optional time) : function() ) time stamp 를 활용 할 수 있다.
+
+  > in Application
+
+    - included Spark Streaming library
+    - and you need source library
+    - 최소 2개의 thread가 필요하다.
+      : DStream을 만드는 thread가 필요하고, 그 DStream을 처리하는 thread가 필요하다. 그래서 최소 2개.
+    - 중단 되었을때 데이터는 버려진다. 그래서 kafka 채널등을 통해 누락 되는 데이터 없도록 하는 방안이 있다.
+
+### Processing Multiple Batches
+
+  > 멀티 배치 오퍼레이션.
+    - Slice : A to B 구간.
+      : DStream.slice(fromTime, toTime)
+      : StreamingContext.remeber(duration)
+      : check point 는 퍼시스트랑 다르게 리니지를 날려버린다.
+      : .updateStateByKey - key값을 기준으로 업데이트 해준다.
+    - State : origin to last
+    - Windows : view time size.
+      : reduceByKeyAndWindow( 리듀스 문법, window size, interval)
 
