@@ -21,10 +21,10 @@ Welcome to
 
 Using Python version 2.7.8 (default, Nov 14 2016 05:07:18)
 SparkContext available as sc, HiveContext available as sqlContext.
--- #sqlcontext 선언.
+\ sqlcontext 선언.
 In [1]: sqlContext
 Out[1]: <pyspark.sql.context.HiveContext at 0x7f613f553450>
--- #sqlContext를 사용해 hdfs 데이터 로드.
+\ sqlContext를 사용해 hdfs 데이터 로드.
 In [2]: webpageDF = sqlContext.read.load("/loudacre/webpage")
 SLF4J: Class path contains multiple SLF4J bindings.
 SLF4J: Found binding in [jar:file:/usr/lib/parquet/lib/parquet-hadoop-bundle-1.5.0-cdh5.7.0.jar!/shaded/parquet/org/slf4j/impl/StaticLoggerBinder.class]
@@ -54,7 +54,8 @@ In [4]: webpageDF.show(5)
 +------------+--------------------+--------------------+
 only showing top 5 rows
 
--- #웹페이지넘버와 연관 파일들 컬럼만 따로 DataFrame 생성
+\ 웹페이지넘버와 연관 파일들 컬럼만 따로 DataFrame 생성 
+\ flatMapValues 를 쓰기 위해서 key-value가 되어야 한다.
 In [5]: assocFilesDF = webpageDF.select(webpageDF.web_page_num, webpageDF.associ
    ...: ated_files)
 
@@ -76,13 +77,13 @@ In [7]: assocFilesDF.show(5)
 +------------+--------------------+
 only showing top 5 rows
 
--- #생성된 데이터 프레임을 map을 통해 RDD로 생성.  (RDD처럼 map을 쓸수 있고 map의 리턴이 RDD라서 RDD로 바로 생성됨.)
+\ 생성된 데이터 프레임을 map을 통해 RDD로 생성.  (RDD처럼 map을 쓸수 있고 map의 리턴이 RDD라서 RDD로 바로 생성됨.)
 In [8]: aFilesRDD = assocFilesDF.map(lambda row : (row.web_page_num, row.associa
    ...: ted_files))
--- #RDD 의 flatMapValues를 통해 associated_files 쪼개기.
+\ RDD 의 flatMapValues를 통해 associated_files 쪼개기.
 In [9]: aFilesRDD2 = aFilesRDD.flatMapValues(lambda filestring:filestring.split(
    ...: ','))
--- #쪼갠 RDD를 받을 새로운 DataFrame 생성.  쪼갠RDD를 assocFilesDF스키마로 생성해라.
+\ 쪼갠 RDD를 받을 새로운 DataFrame 생성.  쪼갠RDD를 assocFilesDF스키마로 생성해라.
 In [10]: aFileDF = sqlContext.createDataFrame(aFilesRDD2, assocFilesDF.schema)
 
 In [11]: aFileDF.printSchema()
@@ -103,7 +104,7 @@ In [12]: aFileDF.show(5)
 +------------+-----------------+
 only showing top 5 rows
 
--- #쪼갠걸로 부족하다. 컬럼 이름을 ...files에서 ...file로 변경
+\ 쪼갠걸로 부족하다. 컬럼 이름을 ...files에서 ...file로 변경
 In [13]: finalDF = aFileDF.withColumnRenamed('associated_files','associated_file
     ...: ')
 
@@ -125,7 +126,7 @@ In [15]: finalDF.show(5)
 +------------+-----------------+
 only showing top 5 rows
 
--- #다 확인 했으면 덮어쓰기로. hdfs의 /loudacre/webpage_files 에 저장
+\ 다 확인 했으면 덮어쓰기로. hdfs의 /loudacre/webpage_files 에 저장
 In [16]: finalDF.write.mode("overwrite").save("/loudacre/webpage_files")
 
 In [17]: exit
