@@ -259,3 +259,62 @@
   > change persistence
 
     - RDD.unpersist() -> RDD.persist()
+
+### Data Frames and Apache Spark SQL
+
+  > Data Frame
+    
+    - spark context를 hive context로 랩핑해서 사용한다.
+    - 기본적으로는 RDD와 유사.
+    - DataFrames 생성은 아래와 같다.
+      : 다른 데이터 스트럭쳐
+      : 다른 RDD
+      : 쿼리나 오퍼레이션을 통해
+      : 프로그램으로 정의된 스키마를 통해
+
+  > Read DataFrame
+
+    - convenience function
+      : json, parquet, orc   (파일네임)
+      : table(hive-tablename)
+      : jdbc(url, table, options)
+    - manual read
+      : sqlContext.read.format().option(),schema().load()
+      : format - 데이터 타입. json 등등
+      : option - 키 벨류로 입력한다. format에 따라 달라진다.
+      : schema - 데이터 원본이 아닌 다른 스키마를 쓸때 사용.
+    
+  > Dataframe Basic operation
+
+    - schema / printSchema : return schema / display on tree type
+    - cashe / persist : 디스크나 메모리에 저장.
+    - columns : 컬럼의 이름을 리턴.
+    - dtypes : 컬럼 이름과 데이터 타입을 쌍으로 리턴한다.
+    - explain : 디버그 인포메이션을 출력.
+
+  > Working with Data in a DataFrame
+   
+    - Queries : Creat a new DataFame
+      : RDD 처럼 변형 불가하고. RDD TransFormation과 유사하다.
+      : RDD 트랜스폼 처럼 체인 처리 할수 있다.
+      : distinct, join, limit, select, where(filter), 
+    - Actions : Driver로 데이터를 반환한다.
+      : lazy를 깨는 트리거!?
+      : collect - all rows.
+      : take(n) / show(n) - first to n rows. show is display.
+      : count - total row number return.
+
+  > Save Dataframe
+    
+    - 리드와 같이 콘비니언 제공 있음.
+      : jdbc, json, parquet, orc, text(single column only), saveAsTable (hive context only)
+    - DF.write.format(),mode().partitionBy().saveAsTable().save()
+  
+  > DF <-> RDD
+
+    - RDD = DF.rdd
+    - DF = sqlContext.createDataFrame(RDD, SCHEMA)
+
+  > when..
+
+    - 
