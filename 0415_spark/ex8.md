@@ -1,6 +1,6 @@
 ### sqoop을 통해 데이터 hdfs로 가져오기.
 
-```r
+```py
 [training@localhost ~]$ sqoop import \
 > --connect jdbc:mysql://localhost/loudacre \
 > --username training --password training \
@@ -134,8 +134,8 @@ In [17]: exit
 
 ### 저장된 데이터 확인
 
-```r
-_일단_리스트_확인
+```py
+\ 일단 리스트 확인
 [training@localhost ~]$ hadoop dfs -ls /loudacre/webpage_files/
 DEPRECATED: Use of this script to execute hdfs command is deprecated.
 Instead use the hdfs command for it.
@@ -148,11 +148,11 @@ Found 7 items
 -rw-rw-rw-   1 training supergroup        915 2019-04-16 19:16 /loudacre/webpage_files/part-r-00001-74daa8c8-4f44-46dd-971a-e7a8d868688c.gz.parquet
 -rw-rw-rw-   1 training supergroup        909 2019-04-16 19:16 /loudacre/webpage_files/part-r-00002-74daa8c8-4f44-46dd-971a-e7a8d868688c.gz.parquet
 -rw-rw-rw-   1 training supergroup        923 2019-04-16 19:16 /loudacre/webpage_files/part-r-00003-74daa8c8-4f44-46dd-971a-e7a8d868688c.gz.parquet
-_로컬로_받아_두고.
+\ 로컬로 받아 두고.
 [training@localhost ~]$ hadoop dfs -get /loudacre/webpage_files/part-r-00000-74daa8c8-4f44-46dd-971a-e7a8d868688c.gz.parquet ~/a.gz.parquet
 DEPRECATED: Use of this script to execute hdfs command is deprecated.
 Instead use the hdfs command for it.
-_parquet_tools_head_로_저장된_데이터_체크
+\ parquet-tools head 로 저장된 데이터 체크
 [training@localhost ~]$ parquet-tools head a.gz.parquet 
 web_page_num = 27
 associated_file = theme.css
