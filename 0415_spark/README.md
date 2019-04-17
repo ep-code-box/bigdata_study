@@ -1,4 +1,5 @@
 # Spark study.
+## http://bit.ly/2Z3HEBY
 
 ### RDD (Resilient Distributed Dataset)
 
@@ -369,4 +370,8 @@
     - State : origin to last
     - Windows : view time size.
       : reduceByKeyAndWindow( 리듀스 문법, window size, interval)
+
+### Streaming Data Sources
+
+  > 
 
