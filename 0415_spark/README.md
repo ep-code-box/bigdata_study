@@ -315,6 +315,38 @@
     - RDD = DF.rdd
     - DF = sqlContext.createDataFrame(RDD, SCHEMA)
 
-  > when..
+### Spark Streaming.
 
-    - 
+  > Use cases
+   
+    - Continuous ETL
+    - Website monitoring
+    - Fraud detection
+    - Ad monetization
+    - Social media analysis
+    - Financial market trends
+
+  > DStream ( Discretized Stream )
+
+    - Spark Stream을 통해 들어온 조각조각?
+    - sc 선언 -> ssc(sc, time_interval) 선언 -> stream 처리 선언( RDD 처리와 동일 ) -> 시작선언 
+
+  > Data source
+
+    - ssc.socketTextStream(hostName, port)
+    - network
+      : Sockets, Flume, Akka Actors, Kafka, ZeroMQ, or Twitter
+    - Files : HDFS 디렉토리를 모니터링 해서 가져올 수 있음.
+
+  > DStream Operations
+
+    - Transformations
+      : map, flatMap, filter
+      : Pair transform. -reduceByKey, groupByKey, join
+      : 그 외 함수는  DS.transform( lambda RDD : RDD.transAPI ) 로 쓴다.
+      : .transform 은 RDD 포인터를 넘겨 주기 때문에 사용 가능해짐.
+    - Output operations
+      : Console - pprint > 10개의 데이터를 보여준다.
+      : File output - saveAsTextFiles (txt) / saveAsObjectFiles (seq)
+      : Executing other Functions - foreachRDD(function) > time stamp가 RDD에 들어간다.?
+
