@@ -379,6 +379,7 @@
 ## Data processing
 
   > PageRank 알고리즘.
+  
     - 정의 : http://www.emh.co.kr/content.pl?google_pagerank_citation_ranking
     - 프로세싱.
       1. 각 페이지는 랭크 1을 가진다.
