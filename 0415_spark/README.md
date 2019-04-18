@@ -362,6 +362,7 @@
 ### Processing Multiple Batches
 
   > 멀티 배치 오퍼레이션.
+
     - Slice : A to B 구간.
       : DStream.slice(fromTime, toTime)
       : StreamingContext.remeber(duration)
@@ -373,5 +374,15 @@
 
 ### Streaming Data Sources
 
-  > 
+  > flafka 실습.
 
+## Data processing
+
+  > PageRank 알고리즘.
+    - 정의 : http://www.emh.co.kr/content.pl?google_pagerank_citation_ranking
+    - 프로세싱.
+      1. 각 페이지는 랭크 1을 가진다.
+      2. 각 페이지는 나가는 링크(b) 만큼 자신의 랭크(a)를 나누어 준다.
+        : (C)ontrib = a/b
+      3. 새로운 랭크는 받은 C를 모두 합치고, sum(C)*.85+.15 를 한다.
+      4. 반복한다.
