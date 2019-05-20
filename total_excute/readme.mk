@@ -257,7 +257,28 @@ See the Repo File column in the Cloudera Manager Version and Download Informatio
 
 For example:
 
-sudo wget <repo_file_url> -P /etc/yum.repos.d/
+sudo wget https://archive.cloudera.com/cm5/redhat/7/x86_64/cm/cloudera-manager.repo -P /etc/yum.repos.d/
+--2019-05-20 06:04:23--  https://archive.cloudera.com/cm5/redhat/7/x86_64/cm/cloudera-manager.repo
+Resolving archive.cloudera.com (archive.cloudera.com)... 151.101.108.167
+Connecting to archive.cloudera.com (archive.cloudera.com)|151.101.108.167|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 290 [binary/octet-stream]
+Saving to: ‘/etc/yum.repos.d/cloudera-manager.repo’
+
+100%[===========================================================================>] 290         --.-K/s   in 0s
+
+2019-05-20 06:04:24 (49.6 MB/s) - ‘/etc/yum.repos.d/cloudera-manager.repo’ saved [290/290]
+
+[root@ip-172-31-39-235 ~]# vi /etc/yum.repos.d/cloudera-manager.repo
+[root@ip-172-31-39-235 ~]# cat /etc/yum.repos.d/cloudera-manager.repo
+[cloudera-manager]
+# Packages for Cloudera Manager, Version 5, on RedHat or CentOS 7 x86_64
+name=Cloudera Manager
+baseurl=https://archive.cloudera.com/cm5/redhat/7/x86_64/cm/5.15.0/
+#baseurl=https://archive.cloudera.com/cm5/redhat/7/x86_64/cm/5/
+gpgkey =https://archive.cloudera.com/cm5/redhat/7/x86_64/cm/RPM-GPG-KEY-cloudera
+gpgcheck = 1
+
 Import the repository signing GPG key:
 RHEL 7 compatible:
 sudo rpm --import https://archive.cloudera.com/cm5/redhat/7/x86_64/cm/RPM-GPG-KEY-cloudera
@@ -310,6 +331,9 @@ java-11-openjdk-devel.x86_64                               1:11.0.3.7-0.el7_6   
 • Install a supported JDBC connector on all nodes
 
 https://mariadb.com/kb/en/library/about-mariadb-connector-j/
+
+https://downloads.mariadb.com/Connectors/java/connector-java-2.4.1/mariadb-java-client-2.4.1.jar
+
 
 • Create the databases and access grants you will need
 • Configure Cloudera Manager to connect to the database
