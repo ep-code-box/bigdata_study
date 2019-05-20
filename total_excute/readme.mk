@@ -1,37 +1,48 @@
-SSH를 사용하여 인스턴스에 연결하려면
+bit.ly/2Hrvegs
+github :star7357
 
-터미널 창에서 ssh 명령을 사용하여 인스턴스에 연결합니다. 프라이빗 키(.pem) 파일과 user_name@public_dns_name을 지정합니다. 예를 들어 Amazon Linux 2 또는 Amazon Linux AMI를 사용한 경우 사용자 이름은 ec2-user입니다.
+#### 각  IP 접속하기.
+ssh -i ./skcc.pem centos@[퍼블릭_IP]
 
-ssh -i /path/my-key-pair.pem ec2-user@ec2-198-51-100-1.compute-1.amazonaws.com
-다음과 같은 응답이 표시됩니다:
+|퍼블릭|프라빗|
+|---|:---:|
+|15.164.140.128 |172.31.39.235|
+|15.164.146.139 |172.31.46.208|
+|15.164.149.231 |172.31.46.141|
+|15.164.152.170 |172.31.42.115|
+|15.164.24.103  |172.31.46.235|
 
-The authenticity of host 'ec2-198-51-100-1.compute-1.amazonaws.com (10.254.142.33)'
-can't be established.
-RSA key fingerprint is 1f:51:ae:28:bf:89:e9:d8:1f:25:5d:37:2d:7d:b8:ca:9f:f5:f1:6f.
-Are you sure you want to continue connecting (yes/no)?
-(IPv6 전용) 또는 IPv6 주소를 이용해 인스턴스에 연결할 수도 있습니다. 프라이빗 키(.pem) 파일 경로 및 적절한 사용자 이름과 IPv6 주소를 사용하여 ssh 명령을 지정합니다. 예를 들어 Amazon Linux 2 또는 Amazon Linux AMI를 사용한 경우 사용자 이름은 ec2-user입니다.
+#### 참고문서
 
-ssh -i /path/my-key-pair.pem ec2-user@2001:db8:1234:1a00:9691:9503:25ad:1761
-(선택 사항) 보안 알림의 지문이 앞의 (선택 사항) 인스턴스 지문 가져오기에서 얻은 지문과 일치하는지 확인합니다. 이들 지문이 일치하지 않으면 누군가가 "메시지 가로채기(man-in-the-middle)" 공격을 시도하고 있는 것일 수 있습니다. 이들 지문이 일치하면 다음 단계를 계속 진행합니다.
+https://www.cloudera.com/documentation/enterprise/5-15-x/topics/install_cm_mariadb.html#install_cm_mariadb
 
-yes를 입력합니다.
+#### 리눅스 정보 확인하기
 
-다음과 같은 응답이 표시됩니다:
+리눅스 버전 확인
 
-Warning: Permanently added 'ec2-198-51-100-1.compute-1.amazonaws.com' (RSA) 
-to the list of known hosts.
+[root@ip-172-31-39-235 ~]# grep . /etc/*-release
+/etc/centos-release:CentOS Linux release 7.6.1810 (Core)
+/etc/os-release:NAME="CentOS Linux"
+/etc/os-release:VERSION="7 (Core)"
+/etc/os-release:ID="centos"
+/etc/os-release:ID_LIKE="rhel fedora"
+/etc/os-release:VERSION_ID="7"
+/etc/os-release:PRETTY_NAME="CentOS Linux 7 (Core)"
+/etc/os-release:ANSI_COLOR="0;31"
+/etc/os-release:CPE_NAME="cpe:/o:centos:centos:7"
+/etc/os-release:HOME_URL="https://www.centos.org/"
+/etc/os-release:BUG_REPORT_URL="https://bugs.centos.org/"
+/etc/os-release:CENTOS_MANTISBT_PROJECT="CentOS-7"
+/etc/os-release:CENTOS_MANTISBT_PROJECT_VERSION="7"
+/etc/os-release:REDHAT_SUPPORT_PRODUCT="centos"
+/etc/os-release:REDHAT_SUPPORT_PRODUCT_VERSION="7"
+/etc/redhat-release:CentOS Linux release 7.6.1810 (Core)
+/etc/system-release:CentOS Linux release 7.6.1810 (Core)
 
+리눅스 bit 확인
 
-퍼블릭                      프라빗
-ssh -i ./skcc.pem centos@15.164.140.128        172.31.39.235
-ssh -i ./skcc.pem centos@15.164.146.139        172.31.46.208
-ssh -i ./skcc.pem centos@15.164.149.231        172.31.46.141
-ssh -i ./skcc.pem centos@15.164.152.170        172.31.42.115
-ssh -i ./skcc.pem centos@15.164.24.103         172.31.46.235
-
-https://www.cloudera.com/documentation/enterprise/5-5-x/topics/cdh_admin_performance.html
-
-
+[root@ip-172-31-39-235 ~]# getconf LONG_BIT
+64
 
 
 - update yum
@@ -73,7 +84,7 @@ vm.swappiness = 0	스왑 사용안함[1]
 vm.swappiness = 1	스왑 사용 최소화
 vm.swappiness = 60	기본값
 vm.swappiness = 100	적극적으로 스왑 사용
-
+```
 [root@zetawiki ~]# sysctl vm.swappiness
 vm.swappiness = 60
 
@@ -84,12 +95,13 @@ vm.swappiness = 40
 영구  기본값에는 vm.swappiness 설정이 없으므로 새로 추가해주어야 한다.[2] 
 [root@zetawiki ~]# vi /etc/sysctl.conf
 vm.swappiness = 40
-
+```
 
 2. Show the mount attributes of your volume(s)
 3. If you have ext-based volumes, list the reserve space setting
 o XFS volumes do not support reserve space
 
+```
 [centos@ip-172-31-39-235 ~]$ df -Th
 Filesystem     Type      Size  Used Avail Use% Mounted on
 /dev/xvda1     xfs       8.0G  896M  7.2G  11% /
@@ -99,11 +111,12 @@ tmpfs          tmpfs     7.8G   17M  7.8G   1% /run
 tmpfs          tmpfs     7.8G     0  7.8G   0% /sys/fs/cgroup
 tmpfs          tmpfs     1.6G     0  1.6G   0% /run/user/0
 tmpfs          tmpfs     1.6G     0  1.6G   0% /run/user/1000
+```
 
 4. Disable transparent hugepage support
 
 https://support.hpe.com/hpsc/doc/public/display?docId=mmr_kc-0111835
-
+```
 [centos@ip-172-31-39-235 ~]$ sudo -i
 [root@ip-172-31-39-235 ~]# echo never > /sys/kernel/mm/transparent_hugepage/enabled
 [root@ip-172-31-39-235 ~]# echo never > /sys/kernel/mm/transparent_hugepage/defrag
@@ -114,7 +127,7 @@ always madvise [never]
 [centos@ip-172-31-46-208 ~]$ sudo vi /boot/grub/menu.lst
 add>>
 transparent_hugepage=never
-
+```
 5. List your network interface configuration
 
 [centos@ip-172-31-39-235 ~]$ ifconfig
@@ -283,34 +296,18 @@ Import the repository signing GPG key:
 RHEL 7 compatible:
 sudo rpm --import https://archive.cloudera.com/cm5/redhat/7/x86_64/cm/RPM-GPG-KEY-cloudera
 
+
+[root@ip-172-31-39-235 ~]# vi /etc/sysconfig//selinux
+
+disable
+
+[root@ip-172-31-39-235 ~]# sestatus
+SELinux status:                 disabled
+
+그리고 설치 와 잘되는 지볼려면 web에 붙어보면 되는데 방화벽이  안뚫리는거 같아.
+
 Use the documentation to complete the following objectives:
 • Install a supported Oracle JDK on your first node
-
-리눅스 버전 확인
-
-[root@ip-172-31-39-235 ~]# grep . /etc/*-release
-/etc/centos-release:CentOS Linux release 7.6.1810 (Core)
-/etc/os-release:NAME="CentOS Linux"
-/etc/os-release:VERSION="7 (Core)"
-/etc/os-release:ID="centos"
-/etc/os-release:ID_LIKE="rhel fedora"
-/etc/os-release:VERSION_ID="7"
-/etc/os-release:PRETTY_NAME="CentOS Linux 7 (Core)"
-/etc/os-release:ANSI_COLOR="0;31"
-/etc/os-release:CPE_NAME="cpe:/o:centos:centos:7"
-/etc/os-release:HOME_URL="https://www.centos.org/"
-/etc/os-release:BUG_REPORT_URL="https://bugs.centos.org/"
-/etc/os-release:CENTOS_MANTISBT_PROJECT="CentOS-7"
-/etc/os-release:CENTOS_MANTISBT_PROJECT_VERSION="7"
-/etc/os-release:REDHAT_SUPPORT_PRODUCT="centos"
-/etc/os-release:REDHAT_SUPPORT_PRODUCT_VERSION="7"
-/etc/redhat-release:CentOS Linux release 7.6.1810 (Core)
-/etc/system-release:CentOS Linux release 7.6.1810 (Core)
-
-리눅스 bit 확인
-
-[root@ip-172-31-39-235 ~]# getconf LONG_BIT
-64
 
 
 [root@ip-172-31-39-235 ~]# yum list java*jdk-devel
@@ -330,9 +327,24 @@ java-11-openjdk-devel.x86_64                               1:11.0.3.7-0.el7_6   
 
 • Install a supported JDBC connector on all nodes
 
-https://mariadb.com/kb/en/library/about-mariadb-connector-j/
+[root@ip-172-31-39-235 ~]# wget https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-5.1.47.tar.gz
+--2019-05-20 06:14:05--  https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-5.1.47.tar.gz
+Resolving dev.mysql.com (dev.mysql.com)... 137.254.60.11
+Connecting to dev.mysql.com (dev.mysql.com)|137.254.60.11|:443... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: https://cdn.mysql.com//Downloads/Connector-J/mysql-connector-java-5.1.47.tar.gz [following]
+--2019-05-20 06:14:06--  https://cdn.mysql.com//Downloads/Connector-J/mysql-connector-java-5.1.47.tar.gz
+Resolving cdn.mysql.com (cdn.mysql.com)... 23.212.13.170
+Connecting to cdn.mysql.com (cdn.mysql.com)|23.212.13.170|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 4452049 (4.2M) [application/x-tar-gz]
+Saving to: ‘mysql-connector-java-5.1.47.tar.gz’
 
-https://downloads.mariadb.com/Connectors/java/connector-java-2.4.1/mariadb-java-client-2.4.1.jar
+100%[===========================================================================>] 4,452,049   --.-K/s   in 0.04s
+
+2019-05-20 06:14:06 (94.5 MB/s) - ‘mysql-connector-java-5.1.47.tar.gz’ saved [4452049/4452049]
+
+[root@ip-172-31-39-235 ~]#
 
 
 • Create the databases and access grants you will need
