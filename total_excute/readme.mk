@@ -31,6 +31,33 @@ ssh -i ./skcc.pem centos@15.164.24.103         172.31.46.235
 
 https://www.cloudera.com/documentation/enterprise/5-5-x/topics/cdh_admin_performance.html
 
+
+
+
+- update yum
+
+sudo yum update
+sudo yum install -y wget
+
+- add ec2-user to sudoers
+
+sudo visudo
+        add -> ec2-user ALL=(ALL) ALL
+
+- change the run level to multi user 
+
+sudo systemctl get-default
+sudo systemctl set-default multi-user.target
+
+- disable firewall
+
+sudo systemctl disable firewalld
+sudo systemctl status firewalld
+
+- change vm sappiness to 1
+
+
+
 1. Check vm.swappiness on all your nodes
 
 https://zetawiki.com/wiki/%EB%A6%AC%EB%88%85%EC%8A%A4_swappiness
@@ -79,6 +106,7 @@ https://support.hpe.com/hpsc/doc/public/display?docId=mmr_kc-0111835
 
 [centos@ip-172-31-39-235 ~]$ sudo -i
 [root@ip-172-31-39-235 ~]# echo never > /sys/kernel/mm/transparent_hugepage/enabled
+[root@ip-172-31-39-235 ~]# echo never > /sys/kernel/mm/transparent_hugepage/defrag
 [root@ip-172-31-39-235 ~]# cat /sys/kernel/mm/transparent_hugepage/enabled
 always madvise [never]
 [root@ip-172-31-39-235 ~]#
@@ -131,31 +159,77 @@ https://zetawiki.com/wiki/%EB%A6%AC%EB%88%85%EC%8A%A4_getent
 172.31.46.141   t4h3
 172.31.42.115   t4h4
 172.31.46.235   t4h5
+ 
+[root@ip-172-31-39-235 centos]# passwd
+Changing password for user root.
+New password:
+BAD PASSWORD: The password is shorter than 8 characters
+Retype new password:
+passwd: all authentication tokens updated successfully.
+[root@ip-172-31-39-235 centos]# vi /etc/ssh/sshd_config
+>>
+permissionspassword yes
+
+[root@ip-172-31-39-235 centos]# service sshd restart
+Redirecting to /bin/systemctl restart sshd.service
+
+[root@ip-172-31-39-235 centos]# ssh-keygen
+Generating public/private rsa key pair.
+Enter file in which to save the key (/root/.ssh/id_rsa):
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+Your identification has been saved in /root/.ssh/id_rsa.
+Your public key has been saved in /root/.ssh/id_rsa.pub.
+The key fingerprint is:
+SHA256:WZQH+Vj0A69r067CqN1VsBUgjj05x40KgmzKll0y7Ts root@ip-172-31-39-235.ap-northeast-2.compute.internal
+The key's randomart image is:
++---[RSA 2048]----+
+|          +=+..  |
+|   . o   =o+o* . |
+|    * + o B== *  |
+| . = = . +.=.= . |
+|  = . . S . o .  |
+| .     .     +   |
+|      E  o  = .  |
+|       o..oo o   |
+|      ... .....  |
++----[SHA256]-----+
+
+[root@ip-172-31-39-235 ~]# ssh-copy-id -i ~/.ssh/id_rsa.pub t4h2 ~ 4
+
+[root@ip-172-31-39-235 ~]# ssh t4h1
+root@t4h1's password:
+Last login: Mon May 20 05:16:33 2019 from t4h3
+[root@t4h1 ~]# exit
+logout
+Connection to t4h1 closed.
+[root@ip-172-31-39-235 ~]# ssh t4h2
+Last login: Mon May 20 05:16:02 2019 from t4h4
+[root@t4h2 ~]# exit
+logout
+Connection to t4h2 closed.
+[root@ip-172-31-39-235 ~]# ssh t4h3
+root@t4h3's password:
+Last login: Mon May 20 05:16:15 2019 from t4h4
+[root@t4h3 ~]# exit
+logout
+Connection to t4h3 closed.
+[root@ip-172-31-39-235 ~]# ssh t4h4
+root@t4h4's password:
+Last login: Mon May 20 05:16:25 2019 from t4h3
+[root@t4h4 ~]# exit
+logout
+Connection to t4h4 closed.
+[root@ip-172-31-39-235 ~]# ssh t4h5
+Last login: Mon May 20 05:16:58 2019
+[root@t4h5 ~]# exit
+logout
+Connection to t4h5 closed.
+
 
 o For DNS, use nslookup
 not installed. can not find packages in centos mirror
 
-- update yum
-
-sudo yum update
-sudo yum install -y wget
-
-- add ec2-user to sudoers
-
-sudo visudo
-        add -> ec2-user ALL=(ALL) ALL
-
-- change the run level to multi user 
-
-sudo systemctl get-default
-sudo systemctl set-default multi-user.target
-
-- disable firewall
-
-sudo systemctl disable firewalld
-sudo systemctl status firewalld
-
-- change vm sappiness to 1
 
 7. Show the nscd service is running
 [centos@ip-172-31-39-235 ~]$ yum install -y nscd
@@ -170,3 +244,96 @@ Redirecting to /bin/systemctl start ntpd.service
 nscd : NIS/NS 를 사용할수 있게 하는 데몬. nscd는 실행중인 프로그램의 그룹을 살피고 패스워드를 변경하거나 다음 질의를 위해 결과를 캐시하는 데몬이다. 
 ntpd : NTPv4데몬
 
+
+
+Cloudera Manager Install Lab
+Path B install using CM 5.15.x
+The full rundown is here. You will have to modify your package repo to get the right
+release. The default repo download always points to the latest version.
+Use the documentation to complete the following objectives:
+• Install a supported Oracle JDK on your first node
+
+[root@ip-172-31-39-235 ~]# yum list java*jdk-devel
+Loaded plugins: fastestmirror
+Loading mirror speeds from cached hostfile
+ * base: centos.mirror.moack.net
+ * extras: centos.mirror.moack.net
+ * updates: centos.mirror.moack.net
+Available Packages
+java-1.6.0-openjdk-devel.x86_64                            1:1.6.0.41-1.13.13.1.el7_3                             base
+java-1.7.0-openjdk-devel.x86_64                            1:1.7.0.221-2.6.18.0.el7_6                             updates
+java-1.8.0-openjdk-devel.i686                              1:1.8.0.212.b04-0.el7_6                                updates
+java-1.8.0-openjdk-devel.x86_64                            1:1.8.0.212.b04-0.el7_6                                updates
+java-11-openjdk-devel.i686                                 1:11.0.3.7-0.el7_6                                     updates
+java-11-openjdk-devel.x86_64                               1:11.0.3.7-0.el7_6                                     updates
+[root@ip-172-31-39-235 ~]# yum install -y openjdk
+
+• Install a supported JDBC connector on all nodes
+• Create the databases and access grants you will need
+• Configure Cloudera Manager to connect to the database
+• Start your Cloudera Manager server -- debug as necessary
+• Do not continue until you can browse your CM instance at port 7180
+
+리눅스 버전 확인
+
+[root@ip-172-31-39-235 ~]# grep . /etc/*-release
+/etc/centos-release:CentOS Linux release 7.6.1810 (Core)
+/etc/os-release:NAME="CentOS Linux"
+/etc/os-release:VERSION="7 (Core)"
+/etc/os-release:ID="centos"
+/etc/os-release:ID_LIKE="rhel fedora"
+/etc/os-release:VERSION_ID="7"
+/etc/os-release:PRETTY_NAME="CentOS Linux 7 (Core)"
+/etc/os-release:ANSI_COLOR="0;31"
+/etc/os-release:CPE_NAME="cpe:/o:centos:centos:7"
+/etc/os-release:HOME_URL="https://www.centos.org/"
+/etc/os-release:BUG_REPORT_URL="https://bugs.centos.org/"
+/etc/os-release:CENTOS_MANTISBT_PROJECT="CentOS-7"
+/etc/os-release:CENTOS_MANTISBT_PROJECT_VERSION="7"
+/etc/os-release:REDHAT_SUPPORT_PRODUCT="centos"
+/etc/os-release:REDHAT_SUPPORT_PRODUCT_VERSION="7"
+/etc/redhat-release:CentOS Linux release 7.6.1810 (Core)
+/etc/system-release:CentOS Linux release 7.6.1810 (Core)
+
+
+
+MySQL/MariaDB Installation Lab
+Configure MySQL with a replica server
+Choose one of these plans to follow:
+• You can use the steps documented here for MariaDB or here for MySQL.
+
+sudo yum install -y mariadb-serve
+
+• The steps below are MySQL-specific.
+
+sudo systemctl stop mariadb
+
+
+o If you are using RHEL/CentOS 7.x, use MariaDB.
+MySQL installation - Plan Two Detail
+1. Download and implement the official MySQL repo
+o Enable the repo to install MySQL 5.5
+o Install the mysql package on all nodes
+o Install mysql-server on the server and replica nodes
+o Download and copy the JDBC connector to all nodes.
+2. You should not need to build a /etc/my.cnf file to start your MySQL server
+o You will have to modify it to support replication. Check MySQL
+documentation.
+3. Start the mysqld service.
+4. Use /usr/bin/mysql_secure_installation to:
+a. Set password protection for the server
+b. Revoke permissions for anonymous users
+c. Permit remote privileged login
+d. Remove test databases
+e. Refresh privileges in memory
+f. Refreshes the mysqld service
+Cloudera Manager Install Lab
+Install a cluster and deploy CDH
+Adhere to the following requirements while creating your cluster:
+• Do not use Single User Mode. Do not. Don't do it.
+• Ignore any steps in the CM wizard that are marked (Optional)
+• Install the Data Hub Edition
+• Install CDH using parcels
+• Deploy only the Core set of CDH services.
+• Deploy three ZooKeeper instances.
+o CM does not tell you to do this but complains if you don't
