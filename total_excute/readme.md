@@ -71,7 +71,7 @@ sudo systemctl status firewalld
 
 
 
-1. Check vm.swappiness on all your nodes
+##### 1. Check vm.swappiness on all your nodes
 
 https://zetawiki.com/wiki/%EB%A6%AC%EB%88%85%EC%8A%A4_swappiness
 
@@ -99,8 +99,8 @@ vm.swappiness = 40
 vm.swappiness = 40
 ```
 
-2. Show the mount attributes of your volume(s)
-3. If you have ext-based volumes, list the reserve space setting
+##### 2. Show the mount attributes of your volume(s)
+##### 3. If you have ext-based volumes, list the reserve space setting
 o XFS volumes do not support reserve space
 
 ```
@@ -115,7 +115,7 @@ tmpfs          tmpfs     1.6G     0  1.6G   0% /run/user/0
 tmpfs          tmpfs     1.6G     0  1.6G   0% /run/user/1000
 ```
 
-4. Disable transparent hugepage support
+##### 4. Disable transparent hugepage support
 
 https://support.hpe.com/hpsc/doc/public/display?docId=mmr_kc-0111835
 
@@ -132,7 +132,7 @@ add>>
 transparent_hugepage=never
 ```
 
-5. List your network interface configuration
+##### 5. List your network interface configuration
 
 ```
 [centos@ip-172-31-39-235 ~]$ ifconfig
@@ -155,7 +155,7 @@ lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
         TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
 ```
 
-6. Show that forward and reverse host lookups are correctly resolved
+##### 6. Show that forward and reverse host lookups are correctly resolved
 o For /etc/hosts, use getent
 
 https://zetawiki.com/wiki/%EB%A6%AC%EB%88%85%EC%8A%A4_getent
@@ -250,7 +250,7 @@ o For DNS, use nslookup
 not installed. can not find packages in centos mirror
 
 
-7. Show the nscd service is running
+##### 7. Show the nscd service is running
 
 ```
 [centos@ip-172-31-39-235 ~]$ yum install -y nscd
@@ -258,7 +258,7 @@ not installed. can not find packages in centos mirror
 Redirecting to /bin/systemctl start nscd.service
 ```
 
-8. Show the ntpd service is running
+##### 8. Show the ntpd service is running
 
 ```
 [centos@ip-172-31-39-235 ~]$ yum install -y ntp
