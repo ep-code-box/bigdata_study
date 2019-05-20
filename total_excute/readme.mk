@@ -290,6 +290,9 @@ java-11-openjdk-devel.x86_64                               1:11.0.3.7-0.el7_6   
 [root@ip-172-31-39-235 ~]# yum install -y openjdk
 
 • Install a supported JDBC connector on all nodes
+
+https://mariadb.com/kb/en/library/about-mariadb-connector-j/
+
 • Create the databases and access grants you will need
 • Configure Cloudera Manager to connect to the database
 • Start your Cloudera Manager server -- debug as necessary
