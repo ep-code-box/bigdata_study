@@ -253,27 +253,6 @@ release. The default repo download always points to the latest version.
 Use the documentation to complete the following objectives:
 • Install a supported Oracle JDK on your first node
 
-[root@ip-172-31-39-235 ~]# yum list java*jdk-devel
-Loaded plugins: fastestmirror
-Loading mirror speeds from cached hostfile
- * base: centos.mirror.moack.net
- * extras: centos.mirror.moack.net
- * updates: centos.mirror.moack.net
-Available Packages
-java-1.6.0-openjdk-devel.x86_64                            1:1.6.0.41-1.13.13.1.el7_3                             base
-java-1.7.0-openjdk-devel.x86_64                            1:1.7.0.221-2.6.18.0.el7_6                             updates
-java-1.8.0-openjdk-devel.i686                              1:1.8.0.212.b04-0.el7_6                                updates
-java-1.8.0-openjdk-devel.x86_64                            1:1.8.0.212.b04-0.el7_6                                updates
-java-11-openjdk-devel.i686                                 1:11.0.3.7-0.el7_6                                     updates
-java-11-openjdk-devel.x86_64                               1:11.0.3.7-0.el7_6                                     updates
-[root@ip-172-31-39-235 ~]# yum install -y openjdk
-
-• Install a supported JDBC connector on all nodes
-• Create the databases and access grants you will need
-• Configure Cloudera Manager to connect to the database
-• Start your Cloudera Manager server -- debug as necessary
-• Do not continue until you can browse your CM instance at port 7180
-
 리눅스 버전 확인
 
 [root@ip-172-31-39-235 ~]# grep . /etc/*-release
@@ -294,6 +273,27 @@ java-11-openjdk-devel.x86_64                               1:11.0.3.7-0.el7_6   
 /etc/os-release:REDHAT_SUPPORT_PRODUCT_VERSION="7"
 /etc/redhat-release:CentOS Linux release 7.6.1810 (Core)
 /etc/system-release:CentOS Linux release 7.6.1810 (Core)
+
+[root@ip-172-31-39-235 ~]# yum list java*jdk-devel
+Loaded plugins: fastestmirror
+Loading mirror speeds from cached hostfile
+ * base: centos.mirror.moack.net
+ * extras: centos.mirror.moack.net
+ * updates: centos.mirror.moack.net
+Available Packages
+java-1.6.0-openjdk-devel.x86_64                            1:1.6.0.41-1.13.13.1.el7_3                             base
+java-1.7.0-openjdk-devel.x86_64                            1:1.7.0.221-2.6.18.0.el7_6                             updates
+java-1.8.0-openjdk-devel.i686                              1:1.8.0.212.b04-0.el7_6                                updates
+java-1.8.0-openjdk-devel.x86_64                            1:1.8.0.212.b04-0.el7_6                                updates
+java-11-openjdk-devel.i686                                 1:11.0.3.7-0.el7_6                                     updates
+java-11-openjdk-devel.x86_64                               1:11.0.3.7-0.el7_6                                     updates
+[root@ip-172-31-39-235 ~]# yum install -y openjdk
+
+• Install a supported JDBC connector on all nodes
+• Create the databases and access grants you will need
+• Configure Cloudera Manager to connect to the database
+• Start your Cloudera Manager server -- debug as necessary
+• Do not continue until you can browse your CM instance at port 7180
 
 
 
