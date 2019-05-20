@@ -116,6 +116,7 @@ tmpfs          tmpfs     1.6G     0  1.6G   0% /run/user/1000
 4. Disable transparent hugepage support
 
 https://support.hpe.com/hpsc/doc/public/display?docId=mmr_kc-0111835
+
 ```
 [centos@ip-172-31-39-235 ~]$ sudo -i
 [root@ip-172-31-39-235 ~]# echo never > /sys/kernel/mm/transparent_hugepage/enabled
@@ -128,8 +129,10 @@ always madvise [never]
 add>>
 transparent_hugepage=never
 ```
+
 5. List your network interface configuration
 
+```
 [centos@ip-172-31-39-235 ~]$ ifconfig
 ens3: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 9001
         inet 172.31.39.235  netmask 255.255.240.0  broadcast 172.31.47.255
@@ -148,13 +151,14 @@ lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
         RX errors 0  dropped 0  overruns 0  frame 0
         TX packets 6  bytes 416 (416.0 B)
         TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
-
+```
 
 6. Show that forward and reverse host lookups are correctly resolved
 o For /etc/hosts, use getent
 
 https://zetawiki.com/wiki/%EB%A6%AC%EB%88%85%EC%8A%A4_getent
 
+```
 [centos@ip-172-31-39-235 ~]$ vi /etc/hosts
 127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
 ::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
@@ -238,21 +242,27 @@ Last login: Mon May 20 05:16:58 2019
 [root@t4h5 ~]# exit
 logout
 Connection to t4h5 closed.
-
+```
 
 o For DNS, use nslookup
 not installed. can not find packages in centos mirror
 
 
 7. Show the nscd service is running
+
+```
 [centos@ip-172-31-39-235 ~]$ yum install -y nscd
 [centos@ip-172-31-39-235 ~]$ sudo service nscd start
 Redirecting to /bin/systemctl start nscd.service
+```
 
 8. Show the ntpd service is running
+
+```
 [centos@ip-172-31-39-235 ~]$ yum install -y ntp
 [centos@ip-172-31-39-235 ~]$ sudo service ntpd start
 Redirecting to /bin/systemctl start ntpd.service
+```
 
 nscd : NIS/NS 를 사용할수 있게 하는 데몬. nscd는 실행중인 프로그램의 그룹을 살피고 패스워드를 변경하거나 다음 질의를 위해 결과를 캐시하는 데몬이다. 
 ntpd : NTPv4데몬
