@@ -35,39 +35,29 @@ https://www.cloudera.com/documentation/enterprise/5-5-x/topics/cdh_admin_perform
 
 https://zetawiki.com/wiki/%EB%A6%AC%EB%88%85%EC%8A%A4_swappiness
 
- 개요
-swappiness
 vm.swappiness
-스왑 활용도, 스와핑 활용도, 스와피니스
+ 스왑 활용도, 스와핑 활용도, 스와피니스
 리눅스 커널 속성 중 하나
 스왑메모리 활용 수준 조절
 스왑 사용의 적극성 수준
-2 값 설명
+
 값의 범위: 0 ~ 100 (기본값: 60)
-값	설명
 vm.swappiness = 0	스왑 사용안함[1]
 vm.swappiness = 1	스왑 사용 최소화
 vm.swappiness = 60	기본값
 vm.swappiness = 100	적극적으로 스왑 사용
-→ 메모리 여유가 충분할 때 성능향상을 위해 vm.swappiness = 10 정도를 권고하는 경우가 있음
-3 확인
+
 [root@zetawiki ~]# sysctl vm.swappiness
 vm.swappiness = 60
-[root@zetawiki ~]# sysctl -a | grep swappiness
-vm.swappiness = 60
-[root@zetawiki ~]# cat /proc/sys/vm/swappiness
-60
-4 변경
-즉시 변경 (재부팅시 초기화됨)
-즉시 변경하는 방법은 아래와 같이 3가지가 있으나, /etc/sysctl.conf에 등록되지 않으면 재부팅 후 원상복구된다.
 
+휘발성
 [root@zetawiki ~]# sysctl vm.swappiness=40
 vm.swappiness = 40
-[root@zetawiki ~]# sysctl -w vm.swappiness=40
+
+영구  기본값에는 vm.swappiness 설정이 없으므로 새로 추가해주어야 한다.[2] 
+[root@zetawiki ~]# vi /etc/sysctl.conf
 vm.swappiness = 40
-[root@zetawiki ~]# echo 40 > /proc/sys/vm/swappiness
-[root@zetawiki ~]# sysctl vm.swappiness
-vm.swappiness = 40
+
 
 2. Show the mount attributes of your volume(s)
 3. If you have ext-based volumes, list the reserve space setting
