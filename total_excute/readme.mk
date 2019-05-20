@@ -135,13 +135,35 @@ https://zetawiki.com/wiki/%EB%A6%AC%EB%88%85%EC%8A%A4_getent
 o For DNS, use nslookup
 not installed. can not find packages in centos mirror
 
+- update yum
+
+sudo yum update
+sudo yum install -y wget
+
+- add ec2-user to sudoers
+
+sudo visudo
+        add -> ec2-user ALL=(ALL) ALL
+
+- change the run level to multi user 
+
+sudo systemctl get-default
+sudo systemctl set-default multi-user.target
+
+- disable firewall
+
+sudo systemctl disable firewalld
+sudo systemctl status firewalld
+
+- change vm sappiness to 1
+
 7. Show the nscd service is running
-[centos@ip-172-31-39-235 ~]$ yum install nscd
+[centos@ip-172-31-39-235 ~]$ yum install -y nscd
 [centos@ip-172-31-39-235 ~]$ sudo service nscd start
 Redirecting to /bin/systemctl start nscd.service
 
 8. Show the ntpd service is running
-[centos@ip-172-31-39-235 ~]$ yum install ntp
+[centos@ip-172-31-39-235 ~]$ yum install -y ntp
 [centos@ip-172-31-39-235 ~]$ sudo service ntpd start
 Redirecting to /bin/systemctl start ntpd.service
 
