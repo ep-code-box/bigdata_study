@@ -27,7 +27,7 @@ ssh -i ./skcc.pem centos@15.164.140.128        172.31.39.235
 ssh -i ./skcc.pem centos@15.164.146.139        172.31.46.208
 ssh -i ./skcc.pem centos@15.164.149.231        172.31.46.141
 ssh -i ./skcc.pem centos@15.164.152.170        172.31.42.115
-ssh -i ./skcc.pem centos@15.164.24.103        172.31.46.235
+ssh -i ./skcc.pem centos@15.164.24.103         172.31.46.235
 
 
 
@@ -131,6 +131,11 @@ https://zetawiki.com/wiki/%EB%A6%AC%EB%88%85%EC%8A%A4_getent
 [centos@ip-172-31-39-235 ~]$ getent hosts
 127.0.0.1       localhost localhost.localdomain localhost4 localhost4.localdomain4
 127.0.0.1       localhost localhost.localdomain localhost6 localhost6.localdomain6
+172.31.39.235   t4h1
+172.31.46.208   t4h2
+172.31.46.141   t4h3
+172.31.42.115   t4h4
+172.31.46.235   t4h5
 
 o For DNS, use nslookup
 not installed.
