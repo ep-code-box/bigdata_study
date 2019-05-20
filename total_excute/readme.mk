@@ -29,7 +29,7 @@ ssh -i ./skcc.pem centos@15.164.149.231        172.31.46.141
 ssh -i ./skcc.pem centos@15.164.152.170        172.31.42.115
 ssh -i ./skcc.pem centos@15.164.24.103         172.31.46.235
 
-
+https://www.cloudera.com/documentation/enterprise/5-5-x/topics/cdh_admin_performance.html
 
 1. Check vm.swappiness on all your nodes
 
@@ -138,7 +138,7 @@ https://zetawiki.com/wiki/%EB%A6%AC%EB%88%85%EC%8A%A4_getent
 172.31.46.235   t4h5
 
 o For DNS, use nslookup
-not installed.
+not installed. can not find packages in centos mirror
 
 7. Show the nscd service is running
 [centos@ip-172-31-39-235 ~]$ yum install nscd
