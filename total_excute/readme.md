@@ -18,8 +18,9 @@ https://www.cloudera.com/documentation/enterprise/5-15-x/topics/install_cm_maria
 
 #### 리눅스 정보 확인하기
 
-리눅스 버전 확인
+###### 리눅스 버전 확인
 
+```
 [root@ip-172-31-39-235 ~]# grep . /etc/*-release
 /etc/centos-release:CentOS Linux release 7.6.1810 (Core)
 /etc/os-release:NAME="CentOS Linux"
@@ -38,12 +39,14 @@ https://www.cloudera.com/documentation/enterprise/5-15-x/topics/install_cm_maria
 /etc/os-release:REDHAT_SUPPORT_PRODUCT_VERSION="7"
 /etc/redhat-release:CentOS Linux release 7.6.1810 (Core)
 /etc/system-release:CentOS Linux release 7.6.1810 (Core)
+```
 
-리눅스 bit 확인
+###### 리눅스 bit 확인
 
+```
 [root@ip-172-31-39-235 ~]# getconf LONG_BIT
 64
-
+```
 
 - update yum
 
