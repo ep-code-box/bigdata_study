@@ -93,6 +93,9 @@ https://support.hpe.com/hpsc/doc/public/display?docId=mmr_kc-0111835
 always madvise [never]
 [root@ip-172-31-39-235 ~]#
 
+[centos@ip-172-31-46-208 ~]$ sudo vi /boot/grub/menu.lst
+add>>
+transparent_hugepage=never
 
 5. List your network interface configuration
 
@@ -133,4 +136,15 @@ o For DNS, use nslookup
 not installed.
 
 7. Show the nscd service is running
+[centos@ip-172-31-39-235 ~]$ yum install nscd
+[centos@ip-172-31-39-235 ~]$ sudo service nscd start
+Redirecting to /bin/systemctl start nscd.service
+
 8. Show the ntpd service is running
+[centos@ip-172-31-39-235 ~]$ yum install ntp
+[centos@ip-172-31-39-235 ~]$ sudo service ntpd start
+Redirecting to /bin/systemctl start ntpd.service
+
+nscd : NIS/NS 를 사용할수 있게 하는 데몬. nscd는 실행중인 프로그램의 그룹을 살피고 패스워드를 변경하거나 다음 질의를 위해 결과를 캐시하는 데몬이다. 
+ntpd : NTPv4데몬
+
