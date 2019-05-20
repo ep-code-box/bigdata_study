@@ -49,26 +49,25 @@ https://www.cloudera.com/documentation/enterprise/5-15-x/topics/install_cm_maria
 ```
 
 - update yum
-
+```
 sudo yum update
 sudo yum install -y wget
-
+```
 - add ec2-user to sudoers
-
+```
 sudo visudo
         add -> ec2-user ALL=(ALL) ALL
-
+```
 - change the run level to multi user 
-
+```
 sudo systemctl get-default
 sudo systemctl set-default multi-user.target
-
+```
 - disable firewall
-
+```
 sudo systemctl disable firewalld
 sudo systemctl status firewalld
-
-- change vm sappiness to 1
+```
 
 
 
