@@ -274,12 +274,14 @@ Path B install using CM 5.15.x
 The full rundown is here. You will have to modify your package repo to get the right
 release. The default repo download always points to the latest version.
 
+
 RHEL compatible
 Download the cloudera-manager.repo file for your OS version to the /etc/yum.repos.d/ directory on the Cloudera Manager Server host.
 See the Repo File column in the Cloudera Manager Version and Download Information table for the URL.
 
 For example:
 
+```
 sudo wget https://archive.cloudera.com/cm5/redhat/7/x86_64/cm/cloudera-manager.repo -P /etc/yum.repos.d/
 --2019-05-20 06:04:23--  https://archive.cloudera.com/cm5/redhat/7/x86_64/cm/cloudera-manager.repo
 Resolving archive.cloudera.com (archive.cloudera.com)... 151.101.108.167
@@ -305,7 +307,7 @@ gpgcheck = 1
 Import the repository signing GPG key:
 RHEL 7 compatible:
 sudo rpm --import https://archive.cloudera.com/cm5/redhat/7/x86_64/cm/RPM-GPG-KEY-cloudera
-
+```
 
 [root@ip-172-31-39-235 ~]# vi /etc/sysconfig//selinux
 
