@@ -91,12 +91,12 @@ vm.swappiness = 100	적극적으로 스왑 사용
 vm.swappiness = 60
 
 휘발성
-[root@zetawiki ~]# sysctl vm.swappiness=40
-vm.swappiness = 40
+[root@zetawiki ~]# sysctl vm.swappiness=1
+vm.swappiness = 1
 
 영구  기본값에는 vm.swappiness 설정이 없으므로 새로 추가해주어야 한다.[2] 
 [root@zetawiki ~]# vi /etc/sysctl.conf
-vm.swappiness = 40
+vm.swappiness = 1
 ```
 
 ##### 2. Show the mount attributes of your volume(s)
