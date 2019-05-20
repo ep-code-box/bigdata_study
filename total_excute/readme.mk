@@ -250,6 +250,18 @@ Cloudera Manager Install Lab
 Path B install using CM 5.15.x
 The full rundown is here. You will have to modify your package repo to get the right
 release. The default repo download always points to the latest version.
+
+RHEL compatible
+Download the cloudera-manager.repo file for your OS version to the /etc/yum.repos.d/ directory on the Cloudera Manager Server host.
+See the Repo File column in the Cloudera Manager Version and Download Information table for the URL.
+
+For example:
+
+sudo wget <repo_file_url> -P /etc/yum.repos.d/
+Import the repository signing GPG key:
+RHEL 7 compatible:
+sudo rpm --import https://archive.cloudera.com/cm5/redhat/7/x86_64/cm/RPM-GPG-KEY-cloudera
+
 Use the documentation to complete the following objectives:
 • Install a supported Oracle JDK on your first node
 
@@ -274,6 +286,12 @@ Use the documentation to complete the following objectives:
 /etc/redhat-release:CentOS Linux release 7.6.1810 (Core)
 /etc/system-release:CentOS Linux release 7.6.1810 (Core)
 
+리눅스 bit 확인
+
+[root@ip-172-31-39-235 ~]# getconf LONG_BIT
+64
+
+
 [root@ip-172-31-39-235 ~]# yum list java*jdk-devel
 Loaded plugins: fastestmirror
 Loading mirror speeds from cached hostfile
@@ -287,7 +305,7 @@ java-1.8.0-openjdk-devel.i686                              1:1.8.0.212.b04-0.el7
 java-1.8.0-openjdk-devel.x86_64                            1:1.8.0.212.b04-0.el7_6                                updates
 java-11-openjdk-devel.i686                                 1:11.0.3.7-0.el7_6                                     updates
 java-11-openjdk-devel.x86_64                               1:11.0.3.7-0.el7_6                                     updates
-[root@ip-172-31-39-235 ~]# yum install -y openjdk
+[root@ip-172-31-39-235 ~]# yum install -y java-1.8.0-openjdk-devel.x86_64
 
 • Install a supported JDBC connector on all nodes
 
