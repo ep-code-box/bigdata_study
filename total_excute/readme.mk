@@ -85,6 +85,8 @@ tmpfs          tmpfs     1.6G     0  1.6G   0% /run/user/1000
 
 4. Disable transparent hugepage support
 
+https://support.hpe.com/hpsc/doc/public/display?docId=mmr_kc-0111835
+
 [centos@ip-172-31-39-235 ~]$ sudo -i
 [root@ip-172-31-39-235 ~]# echo never > /sys/kernel/mm/transparent_hugepage/enabled
 [root@ip-172-31-39-235 ~]# cat /sys/kernel/mm/transparent_hugepage/enabled
@@ -116,6 +118,8 @@ lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
 
 6. Show that forward and reverse host lookups are correctly resolved
 o For /etc/hosts, use getent
+
+https://zetawiki.com/wiki/%EB%A6%AC%EB%88%85%EC%8A%A4_getent
 
 [centos@ip-172-31-39-235 ~]$ cat /etc/hosts
 127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
