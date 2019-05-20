@@ -271,17 +271,14 @@ ntpd : NTPv4데몬
 
 
 
-Cloudera Manager Install Lab
-Path B install using CM 5.15.x
-The full rundown is here. You will have to modify your package repo to get the right
-release. The default repo download always points to the latest version.
-
+##### Cloudera Manager Install Lab
+##### Path B install using CM 5.15.x
+##### The full rundown is here. You will have to modify your package repo to get the right
+##### release. The default repo download always points to the latest version.
 
 RHEL compatible
 Download the cloudera-manager.repo file for your OS version to the /etc/yum.repos.d/ directory on the Cloudera Manager Server host.
 See the Repo File column in the Cloudera Manager Version and Download Information table for the URL.
-
-For example:
 
 ```
 sudo wget https://archive.cloudera.com/cm5/redhat/7/x86_64/cm/cloudera-manager.repo -P /etc/yum.repos.d/
@@ -297,7 +294,6 @@ Saving to: ‘/etc/yum.repos.d/cloudera-manager.repo’
 2019-05-20 06:04:24 (49.6 MB/s) - ‘/etc/yum.repos.d/cloudera-manager.repo’ saved [290/290]
 
 [root@ip-172-31-39-235 ~]# vi /etc/yum.repos.d/cloudera-manager.repo
-[root@ip-172-31-39-235 ~]# cat /etc/yum.repos.d/cloudera-manager.repo
 [cloudera-manager]
 # Packages for Cloudera Manager, Version 5, on RedHat or CentOS 7 x86_64
 name=Cloudera Manager
@@ -308,6 +304,7 @@ gpgcheck = 1
 
 Import the repository signing GPG key:
 RHEL 7 compatible:
+
 sudo rpm --import https://archive.cloudera.com/cm5/redhat/7/x86_64/cm/RPM-GPG-KEY-cloudera
 ```
 
