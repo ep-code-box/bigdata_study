@@ -124,9 +124,14 @@ o For /etc/hosts, use getent
 
 https://zetawiki.com/wiki/%EB%A6%AC%EB%88%85%EC%8A%A4_getent
 
-[centos@ip-172-31-39-235 ~]$ cat /etc/hosts
+[centos@ip-172-31-39-235 ~]$ vi /etc/hosts
 127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
 ::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
+172.31.39.235   t4h1
+172.31.46.208   t4h2
+172.31.46.141   t4h3
+172.31.42.115   t4h4
+172.31.46.235   t4h5
 
 [centos@ip-172-31-39-235 ~]$ getent hosts
 127.0.0.1       localhost localhost.localdomain localhost4 localhost4.localdomain4
