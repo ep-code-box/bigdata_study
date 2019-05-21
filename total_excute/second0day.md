@@ -388,9 +388,8 @@ GRANT ALL ON *.* TO 'training'@'%' IDENTIFIED BY 'training';
 sqoop import --connect jdbc:mysql://util01/loudacre \
              --username training --password training \
              --table device \
-             --target-dir /user/training/device_ex \
              --hive-import \
-             --hive-table device_ex
+             --hive-table device_ex2
 ```
 
 ### Sqoop Parquet and Hive make tables
