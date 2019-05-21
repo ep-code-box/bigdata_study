@@ -329,7 +329,7 @@ a. We will require Flume, Hive, Impala later on
 
 ## Installing Kafka requires some special attention. You will need to download, distribute and activate the Kafka package before you can add the Kafka service.
 
-!(/path/to/image.jpg)
+!(image.jpg)
 
 + Create user “training” with password “training” and add to group wheel for sudo access.
 
