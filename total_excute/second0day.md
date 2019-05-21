@@ -382,9 +382,10 @@ GRANT ALL ON *.* TO 'training'@'%' IDENTIFIED BY 'training';
 
 # Sqoop And Hive
 
-> sudo -u hdfs hdfs dfs -mkdir /loudacre
-
-> sudo -u hdfs hdfs dfs -chown training /loudacre
+```
+sudo -u hdfs hdfs dfs -mkdir /loudacre
+sudo -u hdfs hdfs dfs -chown training /loudacre
+```
 
 ### Sqoop with Meta
 
