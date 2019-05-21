@@ -382,9 +382,10 @@ GRANT ALL ON *.* TO 'training'@'%' IDENTIFIED BY 'training';
 
 # Sqoop And Hive
 
-### Sqoop with Meta
+> sudo -u hdfs hdfs dfs -mkdir /loudacre
+> sudo -u hdfs hdfs dfs -chown training /loudacre
 
-#####  sudo -u hdfs hdfs dfs -chown training /loudacre
+### Sqoop with Meta
 
 ```
 sqoop import --connect jdbc:mysql://util01/loudacre \
@@ -400,10 +401,15 @@ sqoop import --connect jdbc:mysql://util01/loudacre \
 sqoop import \
 --connect jdbc:mysql://util01/loudacre \
 --username training --password training \
---table basestations \
---target-dir /loudacre/basestations_import_parquet \
---fields-terminated-by ("|")
+--table device \
+--target-dir /loudacre/ex_device_import_parquet \
+--delete-target-dir \
+--fields-terminated-by "|" \
 --as-parquetfile
+```
+
+```
+mysql> DESC employee;
 ```
 
 Hive 0.10 - 0.12
@@ -430,5 +436,12 @@ CREATE TABLE parquet_test (
  lst ARRAY<STRING>,
  strct STRUCT<A:STRING,B:STRING>) 
 PARTITIONED BY (part string)
-STORED AS PARQUET;
+STORED AS PARQUET LOCATION '/test-warehouse/tinytable';
 ```
+
+create external table parquet_table_name (x INT, y STRING)
+  ROW FORMAT SERDE 'parquet.hive.serde.ParquetHiveSerDe'
+  STORED AS 
+    INPUTFORMAT "parquet.hive.DeprecatedParquetInputFormat"
+    OUTPUTFORMAT "parquet.hive.DeprecatedParquetOutputFormat"
+    LOCATION '/test-warehouse/tinytable';
