@@ -63,18 +63,22 @@ a. Private_IP FQDN Shortcut
 >```
 
 ##### public
-> 15.164.146.95  master01.cdhcluster.com mn1    
-> 15.164.151.13  util01.cdhcluster.com util01  
-> 15.164.86.198  data01.cdhcluster.com dn1  
-> 15.164.5.68    data02.cdhcluster.com dn2
-> 15.164.63.69   data03.cdhcluster.com dn3 
+```
+15.164.146.95  master01.cdhcluster.com mn1    
+15.164.151.13  util01.cdhcluster.com util01  
+15.164.86.198  data01.cdhcluster.com dn1  
+15.164.5.68    data02.cdhcluster.com dn2
+15.164.63.69   data03.cdhcluster.com dn3 
+```
 
 ##### privite
-> 172.31.7.227
-> 172.31.12.148
-> 172.31.8.146
-> 172.31.10.234
-> 172.31.3.22
+```
+172.31.7.227
+172.31.12.148
+172.31.8.146
+172.31.10.234
+172.31.3.22
+```
 
 > 1 pc ssh-keygen
 >      and ssh-copy-id -i ~/.ssh/id_rsa.pub [all node]
@@ -262,17 +266,32 @@ f. Setup the CM database
 ```
 sudo /usr/share/cmf/schema/scm_prepare_database.sh mysql scm scm-user somepassword
 sudo rm /etc/cloudera-scm-server/db.mgmt.properties
-sudo systemctl start cloudera-scm-server
 ```
 
 g. Start the CM server and prepare to install the cluster through the CM GUI installation process
 
+```
+sudo systemctl start cloudera-scm-server
+```
+
 # Install CDH 5.15.2 Cluster
+
 ## Go to the CM GUI installer and install CDH 5.15.2
 
 1. Specify hosts for your CDH cluster installation
 
+```
+enterprize 버전으로 선택.
+모든 숏컷 주소를 적어 셋팅  mn1, util01, dn1, dn2, dn3
+디폴트로 진행진행진행
+```
+
 2. You may choose to use a common user / password
+
+```
+사용할 계정 정보 및 비밀번호 입력
+즉 모든 곳에 동일한 계정이 셋팅되어야됨.
+```
 
 3. Allow CM to install CM Agent on each of the nodes
 
@@ -282,7 +301,12 @@ g. Start the CM server and prepare to install the cluster through the CM GUI ins
 
 a. We will require Flume, Hive, Impala later on
 
-6. Assign roles to each of the hosts: Please refer here for hints. Install Sqoop, Spark and Kafka Installing Kafka requires some special attention. You will need to download, distribute and activate the Kafka package before you can add the Kafka service.
+6. Assign roles to each of the hosts: Please refer here for hints. 
+
+
+# Install Sqoop, Spark and Kafka
+
+## Installing Kafka requires some special attention. You will need to download, distribute and activate the Kafka package before you can add the Kafka service.
 
 + Create user “training” with password “training” and add to group wheel for sudo access.
 
