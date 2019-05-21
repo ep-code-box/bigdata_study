@@ -386,8 +386,8 @@ GRANT ALL ON *.* TO 'training'@'%' IDENTIFIED BY 'training';
 
 ```
 sqoop import --connect jdbc:mysql://util01/loudacre \
-             --username training --password training \
              --table device \
+             --username training --password training \
              --hive-import \
              --hive-table device_ex2
 ```
