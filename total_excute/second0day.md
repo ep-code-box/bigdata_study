@@ -54,7 +54,6 @@ c. Restart the sshd.service
 >May 21 10:12:51 ip-172-31-10-234.ap-northeast-2.compute.internal sshd>[13653]: Server listening on 0.0.0.0 port 22.
 >May 21 10:12:51 ip-172-31-10-234.ap-northeast-2.compute.internal sshd>[13653]: Server listening on :: port 22.
 >May 21 10:12:51 ip-172-31-10-234.ap-northeast-2.compute.internal systemd>[1]: Started OpenSSH server daemon.
->[centos@ip-172-31-10-234 ~]$
 >```
 
 2. Setup /etc/hosts with the following information for each of the 5 hosts
@@ -88,8 +87,10 @@ a. Private_IP FQDN Shortcut
 ```
 
 > ```
-> 1 pc ssh-keygen
->      and ssh-copy-id -i ~/.ssh/id_rsa.pub [all node]
+>      1 pc 
+> ssh-keygen
+>      and 
+> ssh-copy-id -i ~/.ssh/id_rsa.pub [all node]
 > ```
 
 3. Change the hostname as necessary to the FQDN that you setup above
