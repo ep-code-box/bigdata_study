@@ -404,44 +404,42 @@ sqoop import \
 --table device \
 --target-dir /loudacre/ex_device_import_parquet \
 --delete-target-dir \
---fields-terminated-by "|" \
 --as-parquetfile
+--fields-terminated-by '|' \
 ```
 
 ```
-mysql> DESC employee;
+mysql -u root -p
+
+mysql> DESC device;
++-------------+--------------+------+-----+---------+----------------+
+| Field       | Type         | Null | Key | Default | Extra          |
++-------------+--------------+------+-----+---------+----------------+
+| device_num  | int(11)      | NO   | PRI | NULL    | auto_increment |
+| release_dt  | datetime     | NO   |     | NULL    |                |
+| device_name | varchar(255) | NO   |     | NULL    |                |
+| device_type | varchar(255) | NO   |     | NULL    |                |
++-------------+--------------+------+-----+---------+----------------+
 ```
 
-Hive 0.10 - 0.12
 ```
-CREATE TABLE parquet_test (
- id int,
- str string,
- mp MAP<STRING,STRING>,
- lst ARRAY<STRING>,
- strct STRUCT<A:STRING,B:STRING>) 
-PARTITIONED BY (part string)
-ROW FORMAT SERDE 'parquet.hive.serde.ParquetHiveSerDe'
- STORED AS
- INPUTFORMAT 'parquet.hive.DeprecatedParquetInputFormat'
- OUTPUTFORMAT 'parquet.hive.DeprecatedParquetOutputFormat';
+CREATE EXTERNAL TABLE parquet_test_last(
+    device_num  int     
+  , release_dt  TIMESTAMP
+  , device_name string
+  , device_type string
+) 
+STORED AS PARQUET LOCATION '/loudacre/ex_device_import_parquet'
 ```
 
-Hive 0.13 and later
-```
-CREATE TABLE parquet_test (
- id int,
- str string,
- mp MAP<STRING,STRING>,
- lst ARRAY<STRING>,
- strct STRUCT<A:STRING,B:STRING>) 
-PARTITIONED BY (part string)
-STORED AS PARQUET LOCATION '/test-warehouse/tinytable';
-```
-
-create external table parquet_table_name (x INT, y STRING)
+create external table parquet_table_name (
+    device_num  int     
+  , release_dt  TIMESTAMP
+  , device_name string
+  , device_type string
+) 
   ROW FORMAT SERDE 'parquet.hive.serde.ParquetHiveSerDe'
   STORED AS 
     INPUTFORMAT "parquet.hive.DeprecatedParquetInputFormat"
     OUTPUTFORMAT "parquet.hive.DeprecatedParquetOutputFormat"
-    LOCATION '/test-warehouse/tinytable';
+    LOCATION '/loudacre/ex_device_import_parquet';
