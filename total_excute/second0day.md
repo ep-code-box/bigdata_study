@@ -432,6 +432,7 @@ CREATE EXTERNAL TABLE parquet_test_last(
 STORED AS PARQUET LOCATION '/loudacre/ex_device_import_parquet'
 ```
 
+```
 create external table parquet_table_name (
     device_num  int     
   , release_dt  TIMESTAMP
@@ -443,3 +444,4 @@ create external table parquet_table_name (
     INPUTFORMAT "parquet.hive.DeprecatedParquetInputFormat"
     OUTPUTFORMAT "parquet.hive.DeprecatedParquetOutputFormat"
     LOCATION '/loudacre/ex_device_import_parquet';
+```
