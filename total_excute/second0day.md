@@ -2,6 +2,9 @@
 ps -aux | grep yum
 kill [second column]
 ```
+참조 링크
+
+https://github.com/kate0912/final_lab_2019/blob/master/20190521_%ED%86%B5%ED%95%A9%EC%8B%A4%EC%8A%B52%EC%9D%BC%EC%B0%A8.md
 
 sudo visudo
 ```
