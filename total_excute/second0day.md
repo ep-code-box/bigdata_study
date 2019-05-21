@@ -45,6 +45,24 @@ b. Modify sshd_config to allow password login
 > ```
 
 c. Restart the sshd.service
+>```
+>[centos@ip-172-31-10-234 ~]$ sudo systemctl restart sshd.service
+>[centos@ip-172-31-10-234 ~]$ sudo systemctl status sshd.service
+>● sshd.service - OpenSSH server daemon
+>   Loaded: loaded (/usr/lib/systemd/system/sshd.service; enabled; vendor >preset: enabled)
+>   Active: active (running) since Tue 2019-05-21 10:12:51 KST; 7s ago
+>     Docs: man:sshd(8)
+>           man:sshd_config(5)
+> Main PID: 13653 (sshd)
+>   CGroup: /system.slice/sshd.service
+>           └─13653 /usr/sbin/sshd -D
+>
+>May 21 10:12:51 ip-172-31-10-234.ap-northeast-2.compute.internal systemd>[1]: Starting OpenSSH server daemon...
+>May 21 10:12:51 ip-172-31-10-234.ap-northeast-2.compute.internal sshd>[13653]: Server listening on 0.0.0.0 port 22.
+>May 21 10:12:51 ip-172-31-10-234.ap-northeast-2.compute.internal sshd>[13653]: Server listening on :: port 22.
+>May 21 10:12:51 ip-172-31-10-234.ap-northeast-2.compute.internal systemd>[1]: Started OpenSSH server daemon.
+>[centos@ip-172-31-10-234 ~]$
+>```
 
 2. Setup /etc/hosts with the following information for each of the 5 hosts
 a. Private_IP FQDN Shortcut
