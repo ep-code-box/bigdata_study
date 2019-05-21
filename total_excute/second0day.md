@@ -385,19 +385,19 @@ GRANT ALL ON *.* TO 'training'@'%' IDENTIFIED BY 'training';
 ### Sqoop with Meta
 
 ```
-$ sqoop import -connect jdbc:mysql://127.0.0.1/userdb \
-               -table [table name] \
-               -username dbuser \
-               -password dbpass \
-               -hive \
-               -import
+sqoop import --connect jdbc:mysql://util01/loudacre \
+             --username training --password training \
+             --table device \
+             --target-dir /user/training/device_ex \
+             --hive-import \
+             --hive-table device_ex
 ```
 
 ### Sqoop Parquet and Hive make tables
 
 ```
 sqoop import \
---connect jdbc:mysql://gateway/loudacre \
+--connect jdbc:mysql://서버db가있는서버/loudacre \
 --username training --password training \
 --table basestations \
 --target-dir /loudacre/basestations_import_parquet \
