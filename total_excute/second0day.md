@@ -1,20 +1,3 @@
-```
-getent hosts
-```
-
-#####public
-> 15.164.146.95  master01.cdhcluster.com mn1    
-> 15.164.151.13  util01.cdhcluster.com util01  
-> 15.164.29.201  data01.cdhcluster.com dn1  
-> 15.164.5.68    data02.cdhcluster.com dn2
-> 15.164.63.69   data03.cdhcluster.com dn3 
-
-#####privite
-> 172.31.7.227
-> 172.31.12.148
-> 172.31.3.209
-> 172.31.10.234
-> 172.31.3.22
 
 sudo visudo
 ```
@@ -72,29 +55,213 @@ c. Restart the sshd.service
 
 a. Private_IP FQDN Shortcut
 
+>```
+>vi /etc/hosts
+>getent hosts
+>```
+
+#####public
+> 15.164.146.95  master01.cdhcluster.com mn1    
+> 15.164.151.13  util01.cdhcluster.com util01  
+> 15.164.86.198  data01.cdhcluster.com dn1  
+> 15.164.5.68    data02.cdhcluster.com dn2
+> 15.164.63.69   data03.cdhcluster.com dn3 
+
+#####privite
+> 172.31.7.227
+> 172.31.12.148
+> 172.31.8.146
+> 172.31.10.234
+> 172.31.3.22
+
+> 1 pc ssh-keygen
+>      and ssh-copy-id -i ~/.ssh/id_rsa.pub [all node]
+
 3. Change the hostname as necessary to the FQDN that you setup above
 
 a. Reboot the host
 
 4. Install JDK on each of the hosts (you may choose to install on just the host where you will install CM and use the Wizard later to install on the rest
 
+```
+sudo yum update
+sudo yum install -y wget
+yum list java*jdk-devel
+sudo yum install -y java-1.8.0-openjdk-devel.x86_64
+```
+
 5. On the host that you will install CM:
 
 a. Configure the repository for CM 5.15.2
 
+```
+sudo wget https://archive.cloudera.com/cm5/redhat/7/x86_64/cm/cloudera-manager.repo -P /etc/yum.repos.d/
+
+vi /etc/yum.repos.d/cloudera-manager.repo
+[cloudera-manager]
+# Packages for Cloudera Manager, Version 5, on RedHat or CentOS 7 x86_64
+name=Cloudera Manager
+baseurl=https://archive.cloudera.com/cm5/redhat/7/x86_64/cm/5.15.2/
+#baseurl=https://archive.cloudera.com/cm5/redhat/7/x86_64/cm/5/
+gpgkey =https://archive.cloudera.com/cm5/redhat/7/x86_64/cm/RPM-GPG-KEY-cloudera
+gpgcheck = 1
+
+sudo rpm --import https://archive.cloudera.com/cm5/redhat/7/x86_64/cm/RPM-GPG-KEY-cloudera
+```
+
 b. Install CM
+
+```
+sudo yum update
+sudo yum install 
+sudo yum install -y cloudera-manager-daemons cloudera-manager-server
+sudo systemctl start cloudera-scm-agent
+```
 
 c. Install and enable Maria DB (or a DB of your choice)
 
+```
+sudo yum install mariadb-server
+sudo systemctl stop mariadb
+```
+
+edit  /etc/my.cnf
+
+```
+[mysqld]
+datadir=/var/lib/mysql
+socket=/var/lib/mysql/mysql.sock
+transaction-isolation = READ-COMMITTED
+# Disabling symbolic-links is recommended to prevent assorted security risks;
+# to do so, uncomment this line:
+symbolic-links = 0
+# Settings user and group are ignored when systemd is used.
+# If you need to run mysqld under a different user or group,
+# customize your systemd unit file for mariadb according to the
+# instructions in http://fedoraproject.org/wiki/Systemd
+
+key_buffer = 16M
+key_buffer_size = 32M
+max_allowed_packet = 32M
+thread_stack = 256K
+thread_cache_size = 64
+query_cache_limit = 8M
+query_cache_size = 64M
+query_cache_type = 1
+
+max_connections = 550
+#expire_logs_days = 10
+#max_binlog_size = 100M
+
+#log_bin should be on a disk with enough free space.
+#Replace '/var/lib/mysql/mysql_binary_log' with an appropriate path for your
+#system and chown the specified folder to the mysql user.
+log_bin=/var/lib/mysql/mysql_binary_log
+
+#In later versions of MariaDB, if you enable the binary log and do not set
+#a server_id, MariaDB will not start. The server_id must be unique within
+#the replicating group.
+server_id=1
+
+binlog_format = mixed
+
+read_buffer_size = 2M
+read_rnd_buffer_size = 16M
+sort_buffer_size = 8M
+join_buffer_size = 8M
+
+# InnoDB settings
+innodb_file_per_table = 1
+innodb_flush_log_at_trx_commit  = 2
+innodb_log_buffer_size = 64M
+innodb_buffer_pool_size = 4G
+innodb_thread_concurrency = 8
+innodb_flush_method = O_DIRECT
+innodb_log_file_size = 512M
+
+[mysqld_safe]
+log-error=/var/log/mariadb/mariadb.log
+pid-file=/var/run/mariadb/mariadb.pid
+
+#
+# include all files from the config directory
+#
+!includedir /etc/my.cnf.d
+```
+
+```
+sudo systemctl enable mariadb
+sudo systemctl start mariadb
+```
+
 i. Don’t forget to secure your DB installation
+
+```
+sudo /usr/bin/mysql_secure_installation
+.... y y n y y ....
+```
 
 d. Install the mysql connector or mariadb connector
 
+```py
+- mysql
+wget https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-5.1.46.tar.gz
+tar zxvf mysql-connector-java-5.1.46.tar.gz
+sudo mkdir -p /usr/share/java/
+cd mysql-connector-java-5.1.46
+sudo cp mysql-connector-java-5.1.46-bin.jar /usr/share/java/mysql-connector-java.jar
+```
+
+```py
+- maria
+wget https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-5.1.46.tar.gz
+tar zxvf mysql-connector-java-5.1.46.tar.gz
+sudo mkdir -p /usr/share/java/
+cd mysql-connector-java-5.1.46
+sudo cp mysql-connector-java-5.1.46-bin.jar /usr/share/java/mysql-connector-java.jar
+```
+
 e. Create the necessary users and dbs in your database
+
+```
+mysql -u root -p
+```
+
+```
+CREATE DATABASE scm DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;
+CREATE DATABASE amon DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;
+CREATE DATABASE rmon DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;
+CREATE DATABASE hue DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;
+CREATE DATABASE metastore DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;
+CREATE DATABASE sentry DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;
+CREATE DATABASE oozie DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;
+```
 
 i. Grant them the necessary rights
 
+```
+GRANT ALL ON scm.* TO 'scm-user'@'%' IDENTIFIED BY 'somepassword';
+GRANT ALL ON amon.* TO 'amon-user'@'%' IDENTIFIED BY 'somepassword';
+GRANT ALL ON rmon.* TO 'rmon-user'@'%' IDENTIFIED BY 'somepassword';
+GRANT ALL ON hue.* TO 'hue-user'@'%' IDENTIFIED BY 'somepassword';
+GRANT ALL ON metastore.* TO 'metastore-user'@'%' IDENTIFIED BY 'somepassword';
+GRANT ALL ON sentry.* TO 'sentry-user'@'%' IDENTIFIED BY 'somepassword';
+GRANT ALL ON oozie.* TO 'oozie-user'@'%' IDENTIFIED BY 'somepassword';
+```
+
+```
+FLUSH PRIVILEGES;
+SHOW DATABASES;
+EXIT;
+```
+
 f. Setup the CM database
+
+```
+sudo /usr/share/cmf/schema/scm_prepare_database.sh mysql scm scm-user somepassword
+sudo rm /etc/cloudera-scm-server/db.mgmt.properties
+sudo systemctl start cloudera-scm-server
+```
 
 g. Start the CM server and prepare to install the cluster through the CM GUI installation process
 
