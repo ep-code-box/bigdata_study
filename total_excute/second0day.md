@@ -73,15 +73,17 @@ a. Private_IP FQDN Shortcut
 
 ##### privite
 ```
-172.31.7.227
-172.31.12.148
-172.31.8.146
-172.31.10.234
-172.31.3.22
+172.31.7.227  master01.cdhcluster.com mn1 
+172.31.12.148 util01.cdhcluster.com util01
+172.31.8.146  data01.cdhcluster.com dn1  
+172.31.10.234 data02.cdhcluster.com dn2
+172.31.3.22   data03.cdhcluster.com dn3 
 ```
 
+> ```
 > 1 pc ssh-keygen
 >      and ssh-copy-id -i ~/.ssh/id_rsa.pub [all node]
+> ```
 
 3. Change the hostname as necessary to the FQDN that you setup above
 
