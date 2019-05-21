@@ -16,7 +16,9 @@ centos  ALL=(ALL)       ALL
 ```
 
 #Install CM 5.15
+
 ##You have been provide with 5 nodes that have been prequalified to install CM 5.15
+
 ##and CDH 5.15. You will still need to complete the following:
 
 1. Enable user / password login for each of the 5 nodes
