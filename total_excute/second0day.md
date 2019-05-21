@@ -1,24 +1,20 @@
-public
-15.164.146.95  master01.cdhcluster.com mn1    
-15.164.151.13  util01.cdhcluster.com util01  
-15.164.29.201  data01.cdhcluster.com dn1  
-15.164.5.68    data02.cdhcluster.com dn2
-15.164.63.69   data03.cdhcluster.com dn3 
+```
+getent hosts
+```
 
-privite
-172.31.7.227
-172.31.12.148
-172.31.3.209
-172.31.10.234
-172.31.3.22
+#####public
+> 15.164.146.95  master01.cdhcluster.com mn1    
+> 15.164.151.13  util01.cdhcluster.com util01  
+> 15.164.29.201  data01.cdhcluster.com dn1  
+> 15.164.5.68    data02.cdhcluster.com dn2
+> 15.164.63.69   data03.cdhcluster.com dn3 
 
-127.0.0.1       localhost localhost.localdomain localhost4 localhost4.localdomain4
-127.0.0.1       localhost localhost.localdomain localhost6 localhost6.localdomain6
-172.31.7.227    master01.cdhcluster.com mn1
-172.31.12.148   util01.cdhcluster.com util01
-172.31.3.209    data01.cdhcluster.com dn1
-172.31.10.234   data02.cdhcluster.com dn2
-172.31.3.22     data03.cdhcluster.com dn3
+#####privite
+> 172.31.7.227
+> 172.31.12.148
+> 172.31.3.209
+> 172.31.10.234
+> 172.31.3.22
 
 sudo visudo
 ```
