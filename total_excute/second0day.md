@@ -333,6 +333,12 @@ a. We will require Flume, Hive, Impala later on
 
 + Create user “training” with password “training” and add to group wheel for sudo access.
 
+```
+adduser training
+passwd training
+usermod -aG wheel training
+```
+
 + Log into Hue as user “training” with password “training”
 
  - This will create a HDFS directory for the user
@@ -340,7 +346,6 @@ a. We will require Flume, Hive, Impala later on
 + Now, try ssh’ing into the hosts as user “training”
 
 + From the bit.ly folder, download all.zip and unzip it.
-
 
  - Do this in both your CM host and one of the datanode hosts.
 
