@@ -62,14 +62,14 @@ a. Private_IP FQDN Shortcut
 >getent hosts
 >```
 
-#####public
+##### public
 > 15.164.146.95  master01.cdhcluster.com mn1    
 > 15.164.151.13  util01.cdhcluster.com util01  
 > 15.164.86.198  data01.cdhcluster.com dn1  
 > 15.164.5.68    data02.cdhcluster.com dn2
 > 15.164.63.69   data03.cdhcluster.com dn3 
 
-#####privite
+##### privite
 > 172.31.7.227
 > 172.31.12.148
 > 172.31.8.146
@@ -267,8 +267,8 @@ sudo systemctl start cloudera-scm-server
 
 g. Start the CM server and prepare to install the cluster through the CM GUI installation process
 
-#Install CDH 5.15.2 Cluster
-##Go to the CM GUI installer and install CDH 5.15.2
+# Install CDH 5.15.2 Cluster
+## Go to the CM GUI installer and install CDH 5.15.2
 
 1. Specify hosts for your CDH cluster installation
 
