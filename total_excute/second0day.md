@@ -33,8 +33,17 @@ centos  ALL=(ALL)       ALL
 ##and CDH 5.15. You will still need to complete the following:
 
 1. Enable user / password login for each of the 5 nodes
+
 a. Create a password for user “centos”
+> ```
+> sudo passwd
+> ```
+
 b. Modify sshd_config to allow password login
+> ```
+> sudo vi /etc/ssh/sshd_config
+> ```
+
 c. Restart the sshd.service
 
 2. Setup /etc/hosts with the following information for each of the 5 hosts
