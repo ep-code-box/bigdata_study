@@ -64,24 +64,27 @@ a. Private_IP FQDN Shortcut
 >```
 >vi /etc/hosts
 >getent hosts
+>hostname -f
+>sudo hostnamectl set-hostname [hostname]
+>hostname -f
 >```
 
 ##### public
 ```
-15.164.146.95  master01.cdhcluster.com mn1    
-15.164.151.13  util01.cdhcluster.com util01  
-15.164.86.198  data01.cdhcluster.com dn1  
-15.164.5.68    data02.cdhcluster.com dn2
-15.164.63.69   data03.cdhcluster.com dn3 
-```
+15.164.146.95  master01.cdhcluster.com mn1  |13.124.135.81  
+15.164.151.13  util01.cdhcluster.com util01 |15.164.27.64
+15.164.86.198  data01.cdhcluster.com dn1    |52.78.236.138
+15.164.5.68    data02.cdhcluster.com dn2    |54.180.186.127
+15.164.63.69   data03.cdhcluster.com dn3    |54.180.38.41
+``` 
 
 ##### privite
 ```
-172.31.7.227  master01.cdhcluster.com mn1 
-172.31.12.148 util01.cdhcluster.com util01
-172.31.8.146  data01.cdhcluster.com dn1  
-172.31.10.234 data02.cdhcluster.com dn2
-172.31.3.22   data03.cdhcluster.com dn3 
+172.31.7.227  master01.cdhcluster.com mn1   |172.31.2.81
+172.31.12.148 util01.cdhcluster.com util01  |172
+172.31.8.146  data01.cdhcluster.com dn1     |
+172.31.10.234 data02.cdhcluster.com dn2     |
+172.31.3.22   data03.cdhcluster.com dn3     |
 ```
 
 > ```
