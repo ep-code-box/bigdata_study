@@ -384,6 +384,8 @@ GRANT ALL ON *.* TO 'training'@'%' IDENTIFIED BY 'training';
 
 ### Sqoop with Meta
 
+#####  sudo -u hdfs hdfs dfs -chown training /loudacre
+
 ```
 sqoop import --connect jdbc:mysql://util01/loudacre \
              --table device \
@@ -396,10 +398,11 @@ sqoop import --connect jdbc:mysql://util01/loudacre \
 
 ```
 sqoop import \
---connect jdbc:mysql://서버db가있는서버/loudacre \
+--connect jdbc:mysql://util01/loudacre \
 --username training --password training \
 --table basestations \
 --target-dir /loudacre/basestations_import_parquet \
+--fields-terminated-by ("|")
 --as-parquetfile
 ```
 
