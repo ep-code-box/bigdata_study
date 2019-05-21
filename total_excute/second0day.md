@@ -310,31 +310,19 @@ a. We will require Flume, Hive, Impala later on
 
 |Master Hosts	|Utility Hosts/	Gateway Hosts|	Worker Hosts|
 |---|---|---|
+|Master Host 1:      |One host for all Utility and Gateway roles: 
+|NameNode            |Secondary NameNode                  |Gateway configuration|
+|YARN ResourceManager|Cloudera Manager                    |3 - 10 Worker Hosts: |
+|JobHistory Server   |Cloudera Manager Management Service |DataNode             |
+|ZooKeeper           |Hive Metastore                      |NodeManager          |
+|Kudu master         |HiveServer2                         |Impalad              |
+|Spark History Server|Impala Catalog Server               |Kudu tablet server   |
+|                    |Impala StateStore                   |                     |
+|                    |Hue                                 |                     |
+|                    |Oozie                               |                     |
+|                    |Flume                               |                     |
 
-Master Host 1:
-NameNode
-YARN ResourceManager
-JobHistory Server
-ZooKeeper
-Kudu master
-Spark History Server
-One host for all Utility and Gateway roles:
-Secondary NameNode
-Cloudera Manager
-Cloudera Manager Management Service
-Hive Metastore
-HiveServer2
-Impala Catalog Server
-Impala StateStore
-Hue
-Oozie
-Flume
-Gateway configuration
-3 - 10 Worker Hosts:
-DataNode
-NodeManager
-Impalad
-Kudu tablet server
+
 
 
 # Install Sqoop, Spark and Kafka
