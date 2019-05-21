@@ -317,8 +317,7 @@ a. We will require Flume, Hive, Impala later on
 |                    |Oozie                                       |                     |
 |                    |Flume                                       |                     |
 
-
-
+> ZooKeeper 3곳에.
 
 # Install Sqoop, Spark and Kafka
 
@@ -328,6 +327,7 @@ a. We will require Flume, Hive, Impala later on
 
 + Create user “training” with password “training” and add to group wheel for sudo access.
 
+all node에 계정 생성
 ```
 adduser training
 passwd training
@@ -342,13 +342,29 @@ usermod -aG wheel training
 
 + From the bit.ly folder, download all.zip and unzip it.
 
+util01, dn1
+```
+scp -i [pem key file] [source file] [desti login id]@[destination ip/host : ~/desti folder]
+```
+
  - Do this in both your CM host and one of the datanode hosts.
 
  - Go to training_material/devsh/scripts and review the setup.sh
+ 
+util01, dn1
+```
+sudo yum install -y unzip
+unzip all.zip
+```
 
    * See how it works. We are going to use it to create some data for ourselves but it won’t work right away. See if you can figure out what needs to be done to make it work.
 
    * You will need to add user “training” with password “training” to your MySql installation and Grant the necessary rights
+
+```
+mysql -u root -p
+GRANT ALL ON *.* TO 'training'@'%' IDENTIFIED BY 'training';
+```
 
 + Now, attempt some of the exercises that we did during our previous lessons in our new Hadoop cluster.
 
@@ -363,3 +379,27 @@ usermod -aG wheel training
    * Impala
 
    * Spark
+
+# Sqoop And Hive
+
+### Sqoop with Meta
+
+```
+$ sqoop import -connect jdbc:mysql://127.0.0.1/userdb \
+               -table ORDERS \
+               -username dbuser \
+               -password dbpass \
+               -hive \
+               -import
+```
+
+### Sqoop Parquet and Hive make tables
+
+```
+sqoop import \
+--connect jdbc:mysql://gateway/loudacre \
+--username training --password training \
+--table basestations \
+--target-dir /loudacre/basestations_import_parquet \
+--as-parquetfile
+```
