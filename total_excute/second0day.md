@@ -137,7 +137,7 @@ sudo yum install mariadb-server
 sudo systemctl stop mariadb
 ```
 
-edit  /etc/my.cnf
+> edit  /etc/my.cnf
 > ```
 > [mysqld]
 > datadir=/var/lib/mysql
