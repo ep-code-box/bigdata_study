@@ -310,17 +310,17 @@ a. We will require Flume, Hive, Impala later on
 
 |Master Hosts	|Utility Hosts/	Gateway Hosts|	Worker Hosts|
 |---|---|---|
-|Master Host 1:      |One host for all Utility and Gateway roles: 
-|NameNode            |Secondary NameNode                  |Gateway configuration|
-|YARN ResourceManager|Cloudera Manager                    |3 - 10 Worker Hosts: |
-|JobHistory Server   |Cloudera Manager Management Service |DataNode             |
-|ZooKeeper           |Hive Metastore                      |NodeManager          |
-|Kudu master         |HiveServer2                         |Impalad              |
-|Spark History Server|Impala Catalog Server               |Kudu tablet server   |
-|                    |Impala StateStore                   |                     |
-|                    |Hue                                 |                     |
-|                    |Oozie                               |                     |
-|                    |Flume                               |                     |
+|Master Host 1:      |One host for all Utility and Gateway roles: |Gateway configuration|
+|NameNode            |Secondary NameNode                          |3 - 10 Worker Hosts: |
+|YARN ResourceManager|Cloudera Manager                            |DataNode             |
+|JobHistory Server   |Cloudera Manager Management Service         |NodeManager          |
+|ZooKeeper           |Hive Metastore                              |Impalad              |
+|Kudu master         |HiveServer2                                 |Kudu tablet server   |
+|Spark History Server|Impala Catalog Server                       |                     |
+|                    |Impala StateStore                           |                     |
+|                    |Hue                                         |                     |
+|                    |Oozie                                       |                     |
+|                    |Flume                                       |                     |
 
 
 
