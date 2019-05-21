@@ -386,7 +386,7 @@ GRANT ALL ON *.* TO 'training'@'%' IDENTIFIED BY 'training';
 
 ```
 $ sqoop import -connect jdbc:mysql://127.0.0.1/userdb \
-               -table ORDERS \
+               -table [table name] \
                -username dbuser \
                -password dbpass \
                -hive \
@@ -402,4 +402,31 @@ sqoop import \
 --table basestations \
 --target-dir /loudacre/basestations_import_parquet \
 --as-parquetfile
+```
+
+Hive 0.10 - 0.12
+```
+CREATE TABLE parquet_test (
+ id int,
+ str string,
+ mp MAP<STRING,STRING>,
+ lst ARRAY<STRING>,
+ strct STRUCT<A:STRING,B:STRING>) 
+PARTITIONED BY (part string)
+ROW FORMAT SERDE 'parquet.hive.serde.ParquetHiveSerDe'
+ STORED AS
+ INPUTFORMAT 'parquet.hive.DeprecatedParquetInputFormat'
+ OUTPUTFORMAT 'parquet.hive.DeprecatedParquetOutputFormat';
+```
+
+Hive 0.13 and later
+```
+CREATE TABLE parquet_test (
+ id int,
+ str string,
+ mp MAP<STRING,STRING>,
+ lst ARRAY<STRING>,
+ strct STRUCT<A:STRING,B:STRING>) 
+PARTITIONED BY (part string)
+STORED AS PARQUET;
 ```
