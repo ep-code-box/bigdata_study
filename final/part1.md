@@ -64,6 +64,7 @@ training:x:3800:3800::/home/training:/bin/bash
 [centos@ip-172-31-2-98 ~]$ getent group skcc
 skcc:x:3801:training
 ```
+![결과](./part1_설치완료.PNG)
 
 #### mysql to hive, hive to mysql
 ```
@@ -107,6 +108,7 @@ CREATE TABLE posts (
 ) ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
 STORED AS TEXTFILE LOCATION '/user/training/posts'
 ```
+![결과](./part1_join_query.PNG)
 
 ```sql
 SELECT A.id `id`
@@ -118,6 +120,7 @@ SELECT A.id `id`
  GROUP BY a.id, a.first_name, a.last_name
 -- result save useing hue 
 ```
+![결과](./part1_query_result_to_file.PNG)
 
 ```
 sqoop export --connect "jdbc:mysql://util01/test"  \
@@ -127,3 +130,4 @@ sqoop export --connect "jdbc:mysql://util01/test"  \
              --export-dir /user/training/results \
              --input-fields-terminated-by "\t" \
 ```
+![결과](./part1_export_to_mysql.PNG)
