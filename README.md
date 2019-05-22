@@ -1,4 +1,5 @@
 08418 신성철
+student 11
 
 ![사진](https://github.com/ep-code-box/bigdata_study/blob/master/pic.jpg)
 
