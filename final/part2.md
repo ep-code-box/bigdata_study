@@ -1,5 +1,5 @@
 ### part2_2
-
+![결과](./part2_2.PNG)
 ```sql
 create database problem2;
 
@@ -63,8 +63,8 @@ STORED AS TEXTFILE LOCATION '/user/training/problem4/data/employee1/'
 CREATE EXTERNAL TABLE problem4.emp2 (
   Customer_ID int
 , som_num      int
-, First_Name string
 , Last_Name string
+, First_Name string
 , Adress string
 , City string
 , State string
@@ -92,12 +92,27 @@ select   Customer_ID
 , City 
 , State 
 , Zip_code  from emp2
+;
+INSERT OVERWRITE DIRECTORY '/user/training/problem5'
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY '\t'
+STORED AS TEXTFILE
+select Customer_ID 
+, First_Name 
+, Last_Name 
+, Adress 
+, City 
+, State 
+, Zip_code from emp
+   where state= 'CA'
 ```
 
 
 ### part2_5
+![결과](./part2_5.PNG)
 
 ###### solution.sql
+
 ```sql
 INSERT OVERWRITE DIRECTORY '/user/training/problem5'
 ROW FORMAT DELIMITED
@@ -127,6 +142,7 @@ select fname
 hive -f ./problem5/solution.sql 
 ```
 ### part2_6
+![결과](./part2_6.PNG)
 
 ```sql
 create table solution like employee ;
@@ -137,3 +153,27 @@ from employee;
 ```
 
 ### part2_7
+![결과](./part2_7.PNG)
+
+###### solution.sql
+
+```sql
+INSERT OVERWRITE DIRECTORY '/user/training/problem7'
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY '\t'
+STORED AS TEXTFILE
+with result as 
+(
+    select fname, lname
+    from problem7.employee
+    where city = 'Seattle'
+    order by fname,lname
+)
+select concat(fname,' ',lname) from result
+```
+
+###### run sql file hive
+
+```
+hive -f ./problem7/solution.sql 
+```
