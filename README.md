@@ -8,4 +8,4 @@ student 11
 
 >> [bigdata_study/final/part1.md](https://github.com/ep-code-box/bigdata_study/blob/master/final/part1.md)
 
->> [bigdata_study/final/part1.md](https://github.com/ep-code-box/bigdata_study/blob/master/final/part2.md)
+>> [bigdata_study/final/part2.md](https://github.com/ep-code-box/bigdata_study/blob/master/final/part2.md)
