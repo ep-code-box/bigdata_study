@@ -5,6 +5,7 @@ student 11
 
 > 20190416 - 실습.  lab 2 & bonus.
 >
-> [bigdata_study/final/part1.md](https://github.com/ep-code-box/bigdata_study/blob/master/final/part1.md)
 
-> [bigdata_study/final/part1.md](https://github.com/ep-code-box/bigdata_study/blob/master/final/part2.md)
+>> [bigdata_study/final/part1.md](https://github.com/ep-code-box/bigdata_study/blob/master/final/part1.md)
+
+>> [bigdata_study/final/part1.md](https://github.com/ep-code-box/bigdata_study/blob/master/final/part2.md)
